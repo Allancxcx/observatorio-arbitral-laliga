@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "title": "Observatorio arbitral LaLiga — dataset canónico",
+    "version": "1.1.0",
+    "generated": "2026-10-01",
+    "immutable": true,
+    "note": "Fuente de verdad publicada. Cualquier copia en el navegador es solo lectura. Verificar SHA-256 en INTEGRITY.txt"
+  },
+  "titulos_0304_1718": {
+    "barcelona": { "ligas": 9, "copas": 6, "supercopas": 8, "total": 23 },
+    "real_madrid": { "ligas": 4, "copas": 2, "supercopas": 3, "total": 9 },
+    "fuente": "AS/Opta R01"
+  },
+  "opta_0304_1718": {
+    "barcelona": { "pen_favor": 125, "pen_contra": 57, "saldo_pen": 68, "rojas_propias": 61, "rojas_rivales": 104, "saldo_rojas": 43 },
+    "real_madrid": { "pen_favor": 126, "pen_contra": 66, "saldo_pen": 60, "rojas_propias": 88, "rojas_rivales": 83, "saldo_rojas": -5 },
+    "fuente": "AS/Opta R01"
+  },
+  "marca_0102_1718": {
+    "pts_via_penaltis": { "barcelona": 88, "real_madrid": 125 },
+    "pts_via_rojas_rivales": { "barcelona": 61, "real_madrid": 36 },
+    "techo_impacto_4_arbitros_pts_totales": 21,
+    "techo_impacto_pts_por_temporada": 1.2,
+    "fuente": "Marca Informe Negreira R03"
+  },
+  "prensa_sesgo": {
+    "marca_as_foco_madrid_pct": 83.2,
+    "md_sport_foco_barca_pct": 94.6,
+    "fuente": "MDPI R19"
+  },
+  "negreira_pagos": {
+    "rango_eur_millones": { "min": 7.3, "max": 8.4 },
+    "periodo": "2001-2018",
+    "vehiculos": ["DASNIL 95 SL", "NILSAD SCP", "SOCCERCAM SL"],
+    "fuente": "Fiscalía / AEAT R23"
+  },
+  "ffp_auditoria": {
+    "banderas": [
+      {
+        "id": "FFP-R01",
+        "severidad": "ROJA",
+        "club": "FC Barcelona",
+        "afirmacion": "Pagos millonarios a VP del CTA (Negreira) durante 2001-2018 sin prestación documental clara según Fiscalía",
+        "evidencia_publica": "Denuncia Fiscalía; AEAT; club admitió pagos por 'informes'",
+        "como_verificar": "Leer denuncia Fiscalía + declaración Negreira AEAT + facturas citadas en sumario periodístico",
+        "norma_relevante": "Integridad / posible corrupción deportiva; materialidad contable (gasto vs servicio)",
+        "estado": "En instrucción judicial; no sentencia firme de amaño",
+        "fuentes": ["R23", "R21"]
+      },
+      {
+        "id": "FFP-R02",
+        "severidad": "ROJA",
+        "club": "FC Barcelona",
+        "afirmacion": "Clasificación incorrecta de ingresos por venta de derechos futuros (palancas) en reporting UEFA break-even / CLFS",
+        "evidencia_publica": "CFCB/CAS: misclassification ~267 M€; multa/settlement posteriores",
+        "como_verificar": "Leer award CAS público + summary Settlement Agreement UEFA julio 2025",
+        "norma_relevante": "UEFA CL&FFP / CLFS Annex accounting requirements",
+        "estado": "Sancionado / settlement (15 M€ incondicional; hasta 60 M€)",
+        "fuentes": ["R26", "R27"]
+      },
+      {
+        "id": "FFP-R03",
+        "severidad": "ROJA",
+        "club": "FC Barcelona",
+        "afirmacion": "Incumplimiento requisitos de estabilidad CLFS (Arts. 85-92 ed. 2024) reconocido en settlement 2025",
+        "evidencia_publica": "UEFA Settlement Agreement summary PDF oficial",
+        "como_verificar": "Descargar PDF UEFA editorial.uefa.com settlement Barcelona",
+        "norma_relevante": "CLFS 2024 Arts. 85-92",
+        "estado": "Settlement 2 años vigente",
+        "fuentes": ["R26"]
+      },
+      {
+        "id": "FFP-N01",
+        "severidad": "NARANJA",
+        "club": "FC Barcelona",
+        "afirmacion": "Masa salarial elevada vs ingresos (umbral UEFA ~70%); presión de liquidez post-2018",
+        "evidencia_publica": "Cuentas club 17/18: wage bill ~66% ingresos; crisis posterior documentada",
+        "como_verificar": "Cuentas anuales publicadas FC Barcelona 2017/18 PDF",
+        "norma_relevante": "Cost control / solvency CLFS; estatutos art. 67 club",
+        "estado": "Indicador de riesgo, no prueba de fraude por sí solo",
+        "fuentes": ["R28"]
+      },
+      {
+        "id": "FFP-N02",
+        "severidad": "NARANJA",
+        "club": "FC Barcelona",
+        "afirmacion": "Cesión de ingresos futuros (palancas) tratada por UEFA más como deuda/financiación que como Relevant Income",
+        "evidencia_publica": "CFCB rechazó parte como relevant income; reporte prensa basado en UEFA",
+        "como_verificar": "Settlement/CAS + comunicados CFCB",
+        "norma_relevante": "Definición Relevant Income Annex X CL&FFP",
+        "estado": "Riesgo estructural de reporting",
+        "fuentes": ["R27", "R29"]
+      },
+      {
+        "id": "FFP-N03",
+        "severidad": "NARANJA",
+        "club": "Real Madrid",
+        "afirmacion": "Deuda bruta elevada históricamente (~600 M€ en 2013/14) aunque FFP clásico miraba break-even no stock de deuda",
+        "evidencia_publica": "Memoria club citada por AS 2014; UEFA debatía incluir deuda acumulada",
+        "como_verificar": "Memorias anuales Real Madrid + hemeroteca AS",
+        "norma_relevante": "FFP histórico: break-even; deuda no era sanción directa",
+        "estado": "Riesgo de apalancamiento, no sanción FFP automática entonces",
+        "fuentes": ["R30"]
+      },
+      {
+        "id": "FFP-N04",
+        "severidad": "NARANJA",
+        "club": "Real Madrid",
+        "afirmacion": "Venta de flujos futuros Bernabéu (Sixth Street ~360 M€) — UEFA indicó que este tipo de operaciones no cuentan como beneficio FFP legítimo igual que palancas",
+        "evidencia_publica": "Reportes Telegraph/AllFootball citando posición UEFA sobre ambos clubes",
+        "como_verificar": "Contrastar con cuentas RM y comunicados UEFA/CFCB del periodo",
+        "norma_relevante": "Relevant Income vs financing",
+        "estado": "Misma zona gris que Barça en instrumento; diferencial en sanciones publicadas",
+        "fuentes": ["R29"]
+      },
+      {
+        "id": "FFP-N05",
+        "severidad": "NARANJA",
+        "club": "Ambos / sistema",
+        "afirmacion": "Asimetría de transparencia: pagos Negreira fuera del perímetro 'fair play deportivo' pero con impacto reputacional y posible materialidad si no hubo servicio real",
+        "evidencia_publica": "Fiscalía: facturas sin prestación técnica real acreditada en fase inicial",
+        "como_verificar": "Criterio auditor: substance over form — ¿hay entregables? ¿precio de mercado? ¿independencia?",
+        "norma_relevante": "NIC/NIIF substance; integridad UEFA",
+        "estado": "Pregunta de auditoría forense abierta",
+        "fuentes": ["R23"]
+      },
+      {
+        "id": "FFP-V01",
+        "severidad": "VERDE/CHECK",
+        "club": "FC Barcelona (17/18)",
+        "afirmacion": "Club reportó 8 años de auditorías limpias sin salvedades y ratio deuda neta/EBITDA 0,68 < 2 (estatutos)",
+        "evidencia_publica": "Informe económico 2017/18 publicado por el club",
+        "como_verificar": "PDF cuentas 17/18 FC Barcelona",
+        "norma_relevante": "Estatutos art. 67; auditoría externa",
+        "estado": "No contradice banderas posteriores de reporting UEFA",
+        "fuentes": ["R28"]
+      }
+    ]
+  },
+  "hipotesis_scores": {
+    "H1_compra_dura": 2,
+    "H2_seguro_info": 8,
+    "H3_dominio_deportivo": 6,
+    "H4_sesgo_prensa": 7,
+    "H5_estilo_juego": 5,
+    "H6_combinada": 9
+  }
+}

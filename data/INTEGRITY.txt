@@ -1,0 +1,20 @@
+# INTEGRIDAD DEL DATASET — NO EDITAR SIN REGENERAR HASH
+# Algoritmo: SHA-256
+# Fecha: 2026-10-01
+
+canonical-dataset.json
+SHA256=29fb02ea2df7afbc20b34415969165294d845bc3792f61ac5ac5d2564e3f2eae
+BYTES=7240
+
+Analisis_Arbitraje_Titulos_Referencias_2001-2018.xlsx
+SHA256=0872eb4a1d36d643d7234dbe80dff05586b35547da02d2d287a6eb5f3eaed7c6
+BYTES=29798
+
+# Verificación (desde la carpeta del proyecto):
+# node sellar-integridad.js
+
+# Nota de seguridad:
+# Un visitante PUEDE alterar el HTML en SU navegador (F12 / DevTools).
+# Eso solo afecta su vista local. NO modifica el archivo publicado ni el hash.
+# La fuente de verdad es: JSON canónico + este sellado + Excel.
+# Hosting recomendado: GitHub Pages / S3 / Netlify en modo solo lectura, sin CMS.

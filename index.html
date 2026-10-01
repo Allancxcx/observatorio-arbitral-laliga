@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'" />
+  <meta name="dataset-sha256" content="29fb02ea2df7afbc20b34415969165294d845bc3792f61ac5ac5d2564e3f2eae" />
+  <title>Observatorio arbitral LaLiga 2001–2018 · Vertientes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --bg-elev: #171d25;
+      --bg-soft: #1e2630;
+      --line: #2a3441;
+      --text: #e8eef4;
+      --muted: #8b9aab;
+      --barca: #5b9fd4;
+      --madrid: #c9a227;
+      --warn: #e07a3a;
+      --ok: #3d9a6a;
+      --danger: #d45b5b;
+      --accent: #7eb8da;
+      --radius: 10px;
+      --font: "DM Sans", system-ui, sans-serif;
+      --display: "Instrument Serif", Georgia, serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 10% -20%, #1a3044 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 0%, #2a2410 0%, transparent 50%);
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px 80px; }
+    header.hero {
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 36px;
+    }
+    header.hero h1 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    header.hero .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0 0 20px;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      backdrop-filter: blur(10px);
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      margin: 0 0 28px;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+    .nav a:hover { color: var(--text); border-color: var(--muted); }
+    section { margin-bottom: 56px; scroll-margin-top: 64px; }
+    h2 {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 1.9rem;
+      margin: 0 0 8px;
+    }
+    h3 { font-size: 1.05rem; margin: 24px 0 10px; font-weight: 700; }
+    .sub { color: var(--muted); margin: 0 0 20px; max-width: 70ch; }
+    .grid { display: grid; gap: 14px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 800px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+    .stat {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .stat .label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .stat .value { font-family: var(--display); font-size: 2rem; margin-top: 4px; }
+    .stat .hint { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+    .stat.barca .value { color: var(--barca); }
+    .stat.madrid .value { color: var(--madrid); }
+    .stat.warn .value { color: var(--warn); }
+    .card {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+    .card h3 { margin-top: 0; }
+    .pill {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      margin-right: 6px;
+    }
+    .pill.ok { border-color: var(--ok); color: var(--ok); }
+    .pill.danger { border-color: var(--danger); color: var(--danger); }
+    .pill.warn { border-color: var(--warn); color: var(--warn); }
+    .pill.barca { border-color: var(--barca); color: var(--barca); }
+    .pill.madrid { border-color: var(--madrid); color: var(--madrid); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th { background: var(--bg-soft); color: var(--muted); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:last-child td { border-bottom: none; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+    .bar-row .name { width: 120px; font-size: 0.85rem; flex-shrink: 0; }
+    .bar-track { flex: 1; height: 10px; background: var(--bg-soft); border-radius: 5px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 5px; }
+    .bar-fill.barca { background: var(--barca); }
+    .bar-fill.madrid { background: var(--madrid); }
+    .bar-row .pct { width: 48px; font-size: 0.85rem; color: var(--muted); text-align: right; }
+    .callout {
+      border-left: 3px solid var(--warn);
+      background: color-mix(in srgb, var(--warn) 8%, var(--bg-elev));
+      padding: 14px 16px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 16px 0;
+    }
+    .callout.info { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--bg-elev)); }
+    .callout.ok { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 8%, var(--bg-elev)); }
+    .org {
+      display: grid;
+      gap: 10px;
+    }
+    .org-node {
+      border: 1px solid var(--line);
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+    }
+    .org-node strong { display: block; margin-bottom: 4px; }
+    .org-node .role { color: var(--accent); font-size: 0.85rem; margin-bottom: 6px; }
+    .org-node .can { font-size: 0.85rem; color: var(--muted); }
+    .hyp {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: var(--bg-elev);
+    }
+    .hyp header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+    .score {
+      font-family: var(--display);
+      font-size: 1.6rem;
+    }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .filters button {
+      font-family: inherit;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .filters button.active, .filters button:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .chart-box {
+      background: var(--bg-elev);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    canvas { width: 100% !important; max-height: 280px; }
+    footer {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .tiny { font-size: 0.8rem; color: var(--muted); }
+    ul.clean { margin: 8px 0; padding-left: 1.15rem; }
+    ul.clean li { margin: 4px 0; }
+  </style>
+</head>
+<body data-readonly="true">
+  <div class="wrap">
+    <header class="hero">
+      <p class="pill warn">Análisis multi-vertiente · 2001–2018</p>
+      <h1>Observatorio arbitral LaLiga</h1>
+      <p class="lead">
+        Métricas de títulos, saldo arbitral, prensa, organigrama del CTA y un modelo
+        estadístico de hipótesis — incluida la paradoja: si el Barça “hubiera comprado
+        árbitros”, ¿por qué no ganó todas las Ligas?
+      </p>
+      <p class="tiny">Datos de Opta/AS, Marca, Relevo, Futbolgate, estudios UCM/MDPI, declaraciones Negreira/AEAT. Correlación ≠ causalidad judicial.</p>
+    </header>
+
+    <nav class="nav">
+      <a href="#veredicto">Veredicto</a>
+      <a href="#ffp">Auditoría FFP</a>
+      <a href="#integridad">Integridad</a>
+      <a href="#paradoja">Paradoja Ligas</a>
+      <a href="#hipotesis">Hipótesis</a>
+      <a href="#prensa">Prensa</a>
+      <a href="#cta">CTA / roles</a>
+      <a href="#titulos">Títulos</a>
+      <a href="#saldo">Saldo</a>
+      <a href="#arbitros">Árbitros</a>
+      <a href="#fuentes">Fuentes</a>
+    </nav>
+
+    <!-- VEREDICTO -->
+    <section id="veredicto">
+      <h2>Veredicto en una mirada</h2>
+      <p class="sub">Quién se beneficia depende de la métrica. No hay una sola vertiente.</p>
+      <div class="grid grid-4">
+        <div class="stat barca">
+          <div class="label">Títulos nacionales</div>
+          <div class="value">Barça</div>
+          <div class="hint">23 vs 9 (03/04–17/18)</div>
+        </div>
+        <div class="stat madrid">
+          <div class="label">Puntos vía penaltis</div>
+          <div class="value">Madrid</div>
+          <div class="hint">125 vs 88 (Marca 01–18)</div>
+        </div>
+        <div class="stat barca">
+          <div class="label">Disciplina / rojas</div>
+          <div class="value">Barça</div>
+          <div class="hint">Saldo Opta +43 vs −5</div>
+        </div>
+        <div class="stat warn">
+          <div class="label">Compra total de Ligas</div>
+          <div class="value">No</div>
+          <div class="hint">9/15 Ligas · modelo H1 rechazado</div>
+        </div>
+      </div>
+      <div class="callout info">
+        <strong>Lectura integrada:</strong> el caso Negreira es viable como irregularidad
+        (pagos al nº2 del CTA). Es débil como prueba de “amaño total de campeonatos”.
+        El patrón más coherente con los datos es una ventaja <em>blando/aseguradora</em>
+        (información, clima, disciplina), no un monopolio de títulos.
+      </div>
+    </section>
+
+    <!-- PARADOJA -->
+    <section id="paradoja">
+      <h2>La paradoja: ¿por qué no todas las Ligas?</h2>
+      <p class="sub">
+        Si el objetivo de pagar ~7–8 M€ fuera “comprar campeonatos”, lo racional sería
+        maximizar Ligas ganadas. Los datos no se parecen a ese escenario.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="stat">
+          <div class="label">Ligas Barça (15 temp. Opta)</div>
+          <div class="value">9 / 15</div>
+          <div class="hint">60% · no 100%</div>
+        </div>
+        <div class="stat">
+          <div class="label">Ligas no ganadas</div>
+          <div class="value">6</div>
+          <div class="hint">Madrid 4 · Atlético 1 · Valencia 1*</div>
+        </div>
+        <div class="stat warn">
+          <div class="label">Techo impacto 4 árbitros (Marca)</div>
+          <div class="value">~1,2</div>
+          <div class="hint">puntos por temporada</div>
+        </div>
+      </div>
+      <p class="tiny">*Valencia 03/04 es el arranque del periodo Opta; Madrid 06/07, 07/08, 11/12, 16/17; Atlético 13/14.</p>
+
+      <h3>Modelo de intensidad de corrupción → títulos esperados</h3>
+      <div class="chart-box">
+        <canvas id="chartParadoja" height="220"></canvas>
+        <p class="tiny">Simulación conceptual: probabilidad de ser campeón bajo distintas intensidades de “ayuda”. Observado = 60%. Una compra dura predice ~90–100%.</p>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:16px">
+        <div class="card">
+          <h3>Por qué “comprar todas las Ligas” no cuadra</h3>
+          <ul class="clean">
+            <li><strong>Coste–beneficio:</strong> 1,2 pts/temp (techo Marca) no garantiza el título frente a un Madrid de 90+ puntos.</li>
+            <li><strong>Visibilidad:</strong> un 15/15 en Ligas con dominio mediático Madrid/Barça sería sospecha máxima; 9/15 es plausible deportivamente (Messi era).</li>
+            <li><strong>Ruido:</strong> lesiones, Champions, entrenadores, rivalidad Atlético — variables no controlables por el CTA.</li>
+            <li><strong>Canal realista:</strong> disciplina e información (quién pita, cómo se evalúa) mueven márgenes, no fixtures enteros.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Test estadístico simple</h3>
+          <p>Si en cada temporada el “favorito deportivo” gana con p≈0,55–0,65 (paridad alta entre dos gigantes), esperar ~8–10 Ligas en 15 años es <em>normal</em>.</p>
+          <p>Si la corrupción forzara p=0,95, P(ganar solo 9 o menos) con Binomial(15, 0,95) ≈ <strong>&lt; 0,001%</strong> — el resultado observado rechazaría compra dura.</p>
+          <p class="tiny">Cálculo ilustrativo en consola de la página (ver <code>binomTail</code>). No sustituye un modelo Bayesiano completo.</p>
+        </div>
+      </div>
+
+      <div class="callout ok">
+        <strong>Conclusión de la paradoja:</strong> la anomalía que señalas es real y trabaja
+        <em>en contra</em> de la tesis maximalista. Los datos son más compatibles con
+        “seguro / clima / info / disciplina” que con “compra de campeonatos”.
+      </div>
+    </section>
+
+    <!-- HIPOTESIS -->
+    <section id="hipotesis">
+      <h2>Marco multi-hipótesis (todas las vertientes)</h2>
+      <p class="sub">Cada hipótesis predice un patrón. Contrastamos con la evidencia.</p>
+      <div class="filters" id="hypFilters">
+        <button class="active" data-filter="all">Todas</button>
+        <button data-filter="alta">Compatibilidad alta</button>
+        <button data-filter="media">Media</button>
+        <button data-filter="baja">Baja / rechazada</button>
+      </div>
+      <div class="grid grid-2" id="hypGrid">
+        <article class="hyp" data-level="baja">
+          <header>
+            <div>
+              <span class="pill danger">H1 · Baja</span>
+              <strong>Compra dura de partidos / Ligas</strong>
+            </div>
+            <div class="score" style="color:var(--danger)">2/10</div>
+          </header>
+          <p class="tiny"><strong>Predice:</strong> ~todas las Ligas, penaltis y rojas masivamente a favor, pocos títulos blancos.</p>
+          <p class="tiny"><strong>Observa:</strong> 9/15 Ligas; penaltis casi empatados o a favor Madrid (Marca); Madrid gana 4 Ligas.</p>
+          <p><strong>Veredicto:</strong> rechazada como explicación principal.</p>
+        </article>
+        <article class="hyp" data-level="alta">
+          <header>
+            <div>
+              <span class="pill ok">H2 · Alta</span>
+              <strong>Seguro / neutralidad / info privilegiada</strong>
+            </div>
+            <div class="score" style="color:var(--ok)">8/10</div>
+          </header>
+          <p class="tiny"><strong>Predice:</strong> pagos al CTA; ventaja disciplinaria; no monopolio de títulos; filtraciones de designaciones.</p>
+          <p class="tiny"><strong>Observa:</strong> pagos acreditados; saldo rojas; mensajes Clos/Velasco; Negreira dice que el club quería “que no hubiera decisiones en contra”.</p>
+          <p><strong>Veredicto:</strong> más coherente con pagos + métricas + paradoja.</p>
+        </article>
+        <article class="hyp" data-level="media">
+          <header>
+            <div>
+              <span class="pill warn">H3 · Media</span>
+              <strong>Dominio deportivo puro (Messi/Pep)</strong>
+            </div>
+            <div class="score" style="color:var(--warn)">6/10</div>
+          </header>
+          <p class="tiny"><strong>Predice:</strong> títulos por calidad; no explica pagos ni asimetría de rojas vs faltas recibidas del Madrid.</p>
+          <p class="tiny"><strong>Observa:</strong> dominio real; pero Negreira y saldos disciplinarios quedan sin explicación.</p>
+          <p><strong>Veredicto:</strong> necesario como cofactor, insuficiente solo.</p>
+        </article>
+        <article class="hyp" data-level="media">
+          <header>
+            <div>
+              <span class="pill warn">H4 · Media</span>
+              <strong>Sesgo mediático que distorsiona la percepción</strong>
+            </div>
+            <div class="score" style="color:var(--warn)">7/10</div>
+          </header>
+          <p class="tiny"><strong>Predice:</strong> Marca/AS amplifican victimismo madridista; MD/Sport el culé; debate “robo” asimétrico según ciudad.</p>
+          <p class="tiny"><strong>Observa:</strong> estudios UCM/MDPI: foco Madrid en Marca/AS (~83% rumores), Barça en MD/Sport (~95%).</p>
+          <p><strong>Veredicto:</strong> explica narrativas; no borra métricas arbitrales.</p>
+        </article>
+        <article class="hyp" data-level="media">
+          <header>
+            <div>
+              <span class="pill warn">H5 · Media</span>
+              <strong>Estilo de juego (posesión → rojas rivales)</strong>
+            </div>
+            <div class="score" style="color:var(--warn)">5/10</div>
+          </header>
+          <p class="tiny"><strong>Predice:</strong> Barça más rojas a rivales por dominio; Madrid más rojas propias (Ramos/Pepe).</p>
+          <p class="tiny"><strong>Observa:</strong> parcialmente cierto; no explica Madrid con +1.116 faltas netas y saldo rojas negativo, ni umbral faltas/tarjeta (Relevo).</p>
+          <p><strong>Veredicto:</strong> cofactor; no cierra el gap.</p>
+        </article>
+        <article class="hyp" data-level="alta">
+          <header>
+            <div>
+              <span class="pill ok">H6 · Alta (combinada)</span>
+              <strong>H2 + H3 + H4</strong>
+            </div>
+            <div class="score" style="color:var(--ok)">9/10</div>
+          </header>
+          <p class="tiny">Pagos/seguro arbitral + plantilla histórica + polarización mediática explican a la vez: títulos (no todos), disciplina, escándalo Negreira y guerra de narrativas.</p>
+          <p><strong>Veredicto:</strong> marco operativo para la web y el Excel.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRENSA -->
+    <section id="prensa">
+      <h2>Sesgo de la prensa deportiva española</h2>
+      <p class="sub">Validación académica: no es “opinión de aficionado”. Hay análisis de contenido publicados.</p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3><span class="pill madrid">Eje Madrid</span> Marca &amp; AS</h3>
+          <div class="bar-row">
+            <span class="name">Foco Madrid (fichajes)</span>
+            <div class="bar-track"><div class="bar-fill madrid" style="width:83%"></div></div>
+            <span class="pct">83%</span>
+          </div>
+          <p class="tiny">Promedio Marca 78,3% + AS 88% en portadas de fichajes (MDPI 2015–2019).</p>
+          <ul class="clean">
+            <li>Portadas centradas en Real Madrid (Herrero Gutiérrez, UCM 2018).</li>
+            <li>Mayor difusión nacional (Marca suele liderar audiencia).</li>
+            <li>Amplifica polémicas arbitrales cuando perjudican al Madrid → sesgo de <em>agenda</em>.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="pill barca">Eje Barcelona</span> Mundo Deportivo &amp; Sport</h3>
+          <div class="bar-row">
+            <span class="name">Foco Barça (fichajes)</span>
+            <div class="bar-track"><div class="bar-fill barca" style="width:95%"></div></div>
+            <span class="pct">95%</span>
+          </div>
+          <p class="tiny">MD 96,4% + Sport 92,9% (MDPI). Aún más concentrados en “su” club.</p>
+          <ul class="clean">
+            <li>Espejo catalán del eje madrileño.</li>
+            <li>Estudio Clásico 2003–2018 (Marca vs MD): polarización y sesgo nacionalista/deportivo.</li>
+            <li>También construyen victimismo culé cuando conviene.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Implicación metodológica:</strong> si solo lees Marca/AS, el “robo al Madrid” se sobrepondera.
+        Si solo lees MD/Sport, el “Madrid ayudado” se sobrepondera. Por eso esta página cruza
+        Opta/Marca-informe/Relevo/Futbolgate, no un solo diario.
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>Diario</th><th>Sede / gravitas</th><th>Sesgo de agenda (estudios)</th><th>Riesgo al interpretar Negreira</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Marca</td><td>Madrid · más leído</td><td>Madrid</td><td>Maximiza tesis anti-Barça</td></tr>
+          <tr><td>AS</td><td>Madrid (Prisa)</td><td>Madrid</td><td>Similar; a la vez publicó saldos Opta</td></tr>
+          <tr><td>Mundo Deportivo</td><td>Barcelona (Grupo Godó)</td><td>Barça</td><td>Minimiza impacto / enfatiza “informes”</td></tr>
+          <tr><td>Sport</td><td>Barcelona</td><td>Barça</td><td>Ídem</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <h2>CTA: quién es quién y qué puede hacer</h2>
+      <p class="sub">Clave: el vicepresidente <strong>no designaba</strong> solo los árbitros de Liga. Pero sí evaluaba, formaba y tenía acceso a información sensible.</p>
+
+      <div class="org">
+        <div class="org-node">
+          <strong>Presidente RFEF</strong>
+          <div class="role">Ángel María Villar (hasta 2017) → Luis Rubiales (2018)</div>
+          <div class="can">Nombra al presidente del CTA. Por encima de todo el organigrama arbitral. Cambio 2018 = fin de pagos Negreira según Fiscalía.</div>
+        </div>
+        <div class="org-node">
+          <strong>Presidente CTA</strong>
+          <div class="role">Victoriano Sánchez Arminio (era Negreira) → Velasco Carballo (2018)</div>
+          <div class="can">Máximo responsable técnico. En la Comisión de Designación Profesional su voto pesa; en empate, su criterio prevalece (reglamento histórico). Evalúa y propone internacionales.</div>
+        </div>
+        <div class="org-node">
+          <strong>Vicepresidente CTA — José M. Enríquez Negreira</strong>
+          <div class="role">1994–2018 · cobraba del Barça (Dasnil / Nilsad / Soccercam)</div>
+          <div class="can">
+            Según su declaración AEAT: <em>no designaba</em> (designaba el presidente). Sí: revisar actas, puntuar árbitros (ascensos/descensos), formación, reuniones regionales.
+            Fiscalía: pagos para favorecer decisiones; sospecha de filtrar designaciones vía entorno (ej. Clos en final Copa 2017 con meses de antelación).
+          </div>
+        </div>
+        <div class="org-node">
+          <strong>Comisión Designación 1ª/2ª (tripartita)</strong>
+          <div class="role">Era investigada: Sánchez Arminio (RFEF) + López Nieto (LaLiga) + Puentes Leira (consenso)</div>
+          <div class="can">Elige colegiado por partido. Negreira no era miembro formal; la investigación indaga si su jefe compartía info y él la traficaba.</div>
+        </div>
+        <div class="org-node">
+          <strong>Empresas del entorno</strong>
+          <div class="role">DASNIL 95 SL, NILSAD SCP, SOCCERCAM SL (hijo Javier)</div>
+          <div class="can">Canal de facturación al Barça (~7–8,4 M€ 2001–2018 según tramos Fiscalía/AEAT). Informes de perfiles de árbitros (Gil Manzano, Mateu, Clos, “cuidar a Velasco”).</div>
+        </div>
+      </div>
+
+      <h3>Mapa de influencia (no organigrama oficial)</h3>
+      <div class="chart-box">
+        <canvas id="chartRoles" height="200"></canvas>
+        <p class="tiny">Poder relativo ilustrativo (0–10) sobre designación directa vs influencia indirecta (evaluación / info). Fuente: reglamento CTA + declaraciones + prensa judicial.</p>
+      </div>
+    </section>
+
+    <!-- TITULOS -->
+    <section id="titulos">
+      <h2>Beneficio en títulos</h2>
+      <div class="grid grid-3">
+        <div class="stat barca"><div class="label">Barça nacionales</div><div class="value">23</div><div class="hint">9 Ligas · 6 Copas · 8 Supercopas</div></div>
+        <div class="stat madrid"><div class="label">Madrid nacionales</div><div class="value">9</div><div class="hint">4 Ligas · 2 Copas · 3 Supercopas</div></div>
+        <div class="stat warn"><div class="label">Ligas por ≤4 pts</div><div class="value">4+</div><div class="hint">09/10, 10/11, 14/15, 15/16</div></div>
+      </div>
+      <div class="chart-box" style="margin-top:14px">
+        <canvas id="chartTitulos" height="200"></canvas>
+      </div>
+    </section>
+
+    <!-- SALDO -->
+    <section id="saldo">
+      <h2>Saldo arbitral (métricas core)</h2>
+      <div class="chart-box">
+        <canvas id="chartSaldo" height="240"></canvas>
+      </div>
+      <table style="margin-top:14px">
+        <thead>
+          <tr><th>Fuente</th><th>Métrica</th><th>Barça</th><th>Madrid</th><th>Gap</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>AS/Opta</td><td>Saldo penaltis</td><td>+68</td><td>+60</td><td>+8</td></tr>
+          <tr><td>AS/Opta</td><td>Saldo rojas</td><td>+43</td><td>−5</td><td>+48</td></tr>
+          <tr><td>Marca</td><td>Puntos vía penaltis</td><td>88</td><td>125</td><td>−37</td></tr>
+          <tr><td>Marca</td><td>Puntos vía rojas rivales</td><td>61</td><td>36</td><td>+25</td></tr>
+          <tr><td>Confidencial</td><td>Faltas netas recibidas</td><td>+2.697</td><td>+1.116</td><td>+1.581</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ARBITROS -->
+    <section id="arbitros">
+      <h2>Árbitros con patrón estadístico</h2>
+      <p class="sub">Ninguno confesó favorecer a un club. Patrones vs medias (Relevo/Marca).</p>
+      <table>
+        <thead>
+          <tr><th>Árbitro</th><th>Patrón</th><th>Lado</th><th>Nota</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Clos Gómez</td><td>ICF +28,6 · triple métrica</td><td><span class="pill barca">Barça</span></td><td>Extremo pro-Barça Marca</td></tr>
+          <tr><td>Undiano Mallenco</td><td>Alto volumen · Barça↑</td><td><span class="pill barca">Barça</span></td><td>También favorece a grandes</td></tr>
+          <tr><td>Ayza / Sánchez M. / De Burgos / Mateu</td><td>Barça↑ y Madrid↓</td><td><span class="pill barca">Barça</span></td><td>Grupo impacto ~21 pts</td></tr>
+          <tr><td>Turienzo Álvarez</td><td>Triple métrica Relevo</td><td><span class="pill barca">Barça</span></td><td>Uno de 3 especiales</td></tr>
+          <tr><td>Gil Manzano</td><td>81% vic. Madrid / 57% Barça</td><td><span class="pill madrid">Madrid</span></td><td>Único especial pro-Madrid Relevo</td></tr>
+          <tr><td>Pérez Burrul</td><td>ICF −48,6</td><td><span class="pill madrid">Madrid</span></td><td>Extremo pro-Madrid Marca</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FFP AUDITORÍA -->
+    <section id="ffp">
+      <h2>Auditoría Fair Play Financiero · banderas ROJAS / NARANJAS</h2>
+      <p class="sub">
+        Matriz estilo auditor: cada fila es una <strong>afirmación verificable</strong> (claim),
+        con evidencia pública, procedimiento de comprobación y norma. Un estadístico o
+        financiero puede contrastar fuentes; no es opinión de tertulia.
+      </p>
+
+      <div class="grid grid-3">
+        <div class="stat" style="border-color:var(--danger)">
+          <div class="label">Banderas ROJAS</div>
+          <div class="value" style="color:var(--danger)">3</div>
+          <div class="hint">Pagos Negreira · misclass. UEFA · CLFS breach</div>
+        </div>
+        <div class="stat warn">
+          <div class="label">Banderas NARANJAS</div>
+          <div class="value">5</div>
+          <div class="hint">Palancas, deuda, salarios, asimetría</div>
+        </div>
+        <div class="stat" style="border-color:var(--ok)">
+          <div class="label">Checks VERDES</div>
+          <div class="value" style="color:var(--ok)">1</div>
+          <div class="hint">Cuentas 17/18 sin salvedades (club)</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <strong>Criterio auditor (substance over form):</strong> ¿Hubo servicio real a precio
+        de mercado? ¿El reporting UEFA clasifica bien Relevant Income? ¿Hay independencia
+        del tercero? Roja = incumplimiento documentado o indiciario grave. Naranja = riesgo
+        material / zona gris. Verde = control positivo publicado.
+      </div>
+
+      <h3>Matriz de hallazgos</h3>
+      <table id="ffpTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Sev.</th>
+            <th>Club</th>
+            <th>Afirmación (claim)</th>
+            <th>Cómo verificarlo</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="ffpBody">
+          <tr>
+            <td>FFP-R01</td>
+            <td><span class="pill danger">ROJA</span></td>
+            <td>Barça</td>
+            <td>Pagos 2001–2018 a VP del CTA (~7,3–8,4 M€) sin prestación documental clara según Fiscalía</td>
+            <td>Denuncia Fiscalía + AEAT + admisión de pagos del club</td>
+            <td>Instrucción; no sentencia de amaño</td>
+          </tr>
+          <tr>
+            <td>FFP-R02</td>
+            <td><span class="pill danger">ROJA</span></td>
+            <td>Barça</td>
+            <td>Misclassification de ~267 M€ (venta derechos futuros) en break-even UEFA</td>
+            <td>Award CAS público + CFCB</td>
+            <td>Sancionado / settlement</td>
+          </tr>
+          <tr>
+            <td>FFP-R03</td>
+            <td><span class="pill danger">ROJA</span></td>
+            <td>Barça</td>
+            <td>Incumplimiento estabilidad CLFS Arts. 85–92 → settlement 2025 (15 M€ + hasta 60 M€)</td>
+            <td>PDF oficial UEFA Settlement Agreement</td>
+            <td>Vigente 2 años</td>
+          </tr>
+          <tr>
+            <td>FFP-N01</td>
+            <td><span class="pill warn">NARANJA</span></td>
+            <td>Barça</td>
+            <td>Masa salarial ~66% ingresos (17/18); presión de liquidez posterior</td>
+            <td>Cuentas anuales club 17/18</td>
+            <td>Riesgo, no fraude per se</td>
+          </tr>
+          <tr>
+            <td>FFP-N02</td>
+            <td><span class="pill warn">NARANJA</span></td>
+            <td>Barça</td>
+            <td>Palancas: UEFA trata flujos futuros más como financiación que Relevant Income</td>
+            <td>CAS/CFCB + comunicados</td>
+            <td>Riesgo de reporting</td>
+          </tr>
+          <tr>
+            <td>FFP-N03</td>
+            <td><span class="pill warn">NARANJA</span></td>
+            <td>Madrid</td>
+            <td>Deuda bruta ~602 M€ (2013/14); FFP clásico no sancionaba stock de deuda</td>
+            <td>Memoria club + AS 2014</td>
+            <td>Riesgo apalancamiento</td>
+          </tr>
+          <tr>
+            <td>FFP-N04</td>
+            <td><span class="pill warn">NARANJA</span></td>
+            <td>Madrid</td>
+            <td>Cesión flujos Bernabéu (~360 M€ Sixth Street): misma zona gris UEFA que palancas</td>
+            <td>Cuentas RM + posición UEFA reportada</td>
+            <td>Instrumento similar; menos sanciones publicadas</td>
+          </tr>
+          <tr>
+            <td>FFP-N05</td>
+            <td><span class="pill warn">NARANJA</span></td>
+            <td>Sistema</td>
+            <td>Negreira: materialidad contable si no hay substance (servicio/precio/independencia)</td>
+            <td>Prueba de entregables + benchmarking honorarios</td>
+            <td>Auditoría forense abierta</td>
+          </tr>
+          <tr>
+            <td>FFP-V01</td>
+            <td><span class="pill ok">CHECK</span></td>
+            <td>Barça 17/18</td>
+            <td>8 años auditorías sin salvedades; deuda neta/EBITDA 0,68 &lt; 2</td>
+            <td>PDF económico club 17/18</td>
+            <td>No anula R02/R03 posteriores</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Lectura financiera vs deportiva</h3>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Qué puede afirmar un auditor</h3>
+          <ul class="clean">
+            <li>Hay <strong>pagos reales</strong> a un cargo del CTA (hecho).</li>
+            <li>Hay <strong>sanciones UEFA documentadas</strong> por reporting (hecho).</li>
+            <li>Hay <strong>asimetría</strong> Barça (más rojas FFP publicadas) vs Madrid (naranjas de deuda/instrumentos).</li>
+            <li>No puede, solo con FFP, afirmar “compró Ligas” (eso es H1, ya rechazada estadísticamente).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Qué NO demuestra FFP solo</h3>
+          <ul class="clean">
+            <li>Que un colegiado concreto vendiera un partido.</li>
+            <li>Que los 23 títulos nacionales sean nulos.</li>
+            <li>Que Marca/AS o MD/Sport sean “prueba” financiera.</li>
+          </ul>
+          <p class="tiny">FFP audita dinero y reporting. Integridad arbitral se audita con otra matriz (ya en esta web).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEGRIDAD -->
+    <section id="integridad">
+      <h2>Integridad de datos · anti-edición</h2>
+      <p class="sub">
+        Nadie “externo” puede cambiar la <em>fuente de verdad publicada</em> desde el navegador.
+        Sí puede alterar lo que <em>él ve</em> en su pantalla (F12). Por eso sellamos con SHA-256.
+      </p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Qué protege esto</h3>
+          <ul class="clean">
+            <li>Dataset canónico en <code>data/canonical-dataset.json</code> (solo lectura).</li>
+            <li>Sellado <code>data/INTEGRITY.txt</code> con SHA-256.</li>
+            <li>Hash embebido en <code>&lt;meta name="dataset-sha256"&gt;</code>.</li>
+            <li><code>Object.freeze</code> del objeto en memoria + <code>contenteditable=false</code>.</li>
+            <li>CSP: sin formularios (<code>form-action 'none'</code>), sin plugins.</li>
+            <li>Sin API de escritura, sin CMS, sin localStorage como fuente.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Qué NO puede impedir un HTML estático</h3>
+          <ul class="clean">
+            <li>Que alguien edite el DOM en DevTools (solo su copia local).</li>
+            <li>Que descargue y modifique archivos si tiene acceso al repo (por eso el hash).</li>
+          </ul>
+          <p class="tiny">Si el hash no coincide → la copia está alterada. Hosting: Pages/S3/Netlify read-only.</p>
+        </div>
+      </div>
+
+      <div class="stat" style="margin-top:14px">
+        <div class="label">Estado de verificación en este navegador</div>
+        <div class="value" id="integrityStatus" style="font-size:1.4rem">Comprobando…</div>
+        <div class="hint" id="integrityDetail">—</div>
+      </div>
+      <p class="tiny" style="margin-top:10px">
+        Hash esperado: <code id="expectedHash">29fb02ea2df7afbc20b34415969165294d845bc3792f61ac5ac5d2564e3f2eae</code><br />
+        Hash calculado: <code id="computedHash">—</code>
+      </p>
+      <p class="tiny">Excel: SHA-256 <code>0872eb4a1d36d643d7234dbe80dff05586b35547da02d2d287a6eb5f3eaed7c6</code> (ver <code>data/INTEGRITY.txt</code>). Regenerar con <code>node sellar-integridad.js</code>.</p>
+    </section>
+
+    <!-- FUENTES -->
+    <section id="fuentes">
+      <h2>Fuentes y referencias</h2>
+      <p class="sub">Misma base que el Excel <code>Analisis_Arbitraje_Titulos_Referencias_2001-2018.xlsx</code>.</p>
+      <table>
+        <thead><tr><th>ID</th><th>Fuente</th><th>Aporta</th></tr></thead>
+        <tbody>
+          <tr><td>R01</td><td><a href="https://as.com/futbol/primera/el-barca-mejor-balance-de-rojas-penaltis-y-titulos-de-2003-a-2018-n/" target="_blank" rel="noopener">AS / Opta</a></td><td>Saldos + títulos</td></tr>
+          <tr><td>R03</td><td><a href="https://www.marca.com/futbol/caso-negreira-informe-arbitros-espana.shtml" target="_blank" rel="noopener">Marca Informe Negreira</a></td><td>Árbitros, ICF, techo 1,2 pts</td></tr>
+          <tr><td>R05</td><td><a href="https://www.futbolgate.com/investigaci%C3%B3n/las-estad%C3%ADsticas-del-saldo-arbitral" target="_blank" rel="noopener">Futbolgate</a></td><td>Saldo temporal</td></tr>
+          <tr><td>R07</td><td><a href="https://www.relevo.com/futbol/liga-primera/manzano-talisman-real-madrid-gafe-20231027121736-nt.html" target="_blank" rel="noopener">Relevo</a></td><td>Gil Manzano / Clos / Turienzo</td></tr>
+          <tr><td>R10</td><td><a href="https://www.elconfidencial.com/deportes/futbol/2023-02-26/caso-negreira-datos-penaltis-rojas_3581237/" target="_blank" rel="noopener">El Confidencial</a></td><td>Faltas vs rojas</td></tr>
+          <tr><td>Prensa</td><td><a href="https://revistas.ucm.es/index.php/ESMP/article/view/62221" target="_blank" rel="noopener">UCM Herrero 2018</a> · <a href="https://www.mdpi.com/2304-6775/9/1/9" target="_blank" rel="noopener">MDPI rumores</a></td><td>Sesgo diarios</td></tr>
+          <tr><td>CTA</td><td><a href="https://www.libertaddigital.com/deportes/liga/2015-01-16/como-se-designan-los-arbitros-de-la-liga-1276538194/" target="_blank" rel="noopener">Designaciones</a> · <a href="https://www.marca.com/futbol/barcelona/2023/03/21/641a170c46163fce958b4588.html" target="_blank" rel="noopener">Declaración Negreira</a></td><td>Roles reales</td></tr>
+          <tr><td>Fiscalía</td><td><a href="https://elpais.com/deportes/2023-03-10/la-fiscalia-acusa-tambien-a-sandro-rosell-en-su-denuncia-contra-el-fc-barcelona.html" target="_blank" rel="noopener">El País</a></td><td>Acusación pagos</td></tr>
+          <tr><td>R26</td><td><a href="https://editorial.uefa.com/resources/029b-1e280bdeaa27-80022e461078-1000/barcelona_summary_version_2-year_sa_20250704174412.pdf" target="_blank" rel="noopener">UEFA Settlement Barça 2025</a></td><td>FFP-R03 multa/CLFS</td></tr>
+          <tr><td>R27</td><td><a href="https://www.tas-cas.org/fileadmin/user_upload/10310_Award__FINAL_for_publ._.pdf" target="_blank" rel="noopener">CAS Award (misclassification)</a></td><td>FFP-R02 ~267 M€</td></tr>
+          <tr><td>R28</td><td><a href="https://media-public.fcbarcelona.com/20157/100546996/1084458/1.0/1084458.pdf" target="_blank" rel="noopener">Cuentas Barça 17/18</a></td><td>FFP-V01 / N01</td></tr>
+          <tr><td>R30</td><td><a href="https://as.com/futbol/2014/10/13/internacional/1413215464_468353.html" target="_blank" rel="noopener">AS deuda Madrid/Barça 2014</a></td><td>FFP-N03</td></tr>
+          <tr><td>Integridad</td><td><code>data/INTEGRITY.txt</code> + <code>canonical-dataset.json</code></td><td>SHA-256 sellado</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      <p>Página estática de síntesis analítica. No es un dictamen judicial. Abre el archivo HTML en el navegador; no requiere servidor.</p>
+      <p>Excel asociado: <code>Analisis_Arbitraje_Titulos_Referencias_2001-2018.xlsx</code> en la misma carpeta.</p>
+    </footer>
+  </div>
+
+  <script>
+    // —— Anti-edición / integridad ——
+    document.documentElement.contentEditable = "false";
+    document.body.contentEditable = "false";
+    document.body.spellcheck = false;
+
+    const EXPECTED_SHA256 = (
+      document.querySelector('meta[name="dataset-sha256"]') || {}
+    ).content || "29fb02ea2df7afbc20b34415969165294d845bc3792f61ac5ac5d2564e3f2eae";
+
+    async function sha256Hex(buffer) {
+      const digest = await crypto.subtle.digest("SHA-256", buffer);
+      return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function verifyIntegrity() {
+      const statusEl = document.getElementById("integrityStatus");
+      const detailEl = document.getElementById("integrityDetail");
+      const computedEl = document.getElementById("computedHash");
+      try {
+        const res = await fetch("./data/canonical-dataset.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const buf = await res.arrayBuffer();
+        const hex = await sha256Hex(buf);
+        computedEl.textContent = hex;
+        const ok = hex === EXPECTED_SHA256;
+        if (ok) {
+          const data = JSON.parse(new TextDecoder().decode(buf));
+          Object.freeze(data);
+          if (data.ffp_auditoria) Object.freeze(data.ffp_auditoria);
+          window.__CANONICAL__ = data;
+          statusEl.textContent = "ÍNTEGRO";
+          statusEl.style.color = "var(--ok)";
+          detailEl.textContent = "SHA-256 coincide con el sellado publicado. Dataset congelado en memoria.";
+        } else {
+          statusEl.textContent = "ALTERADO / NO COINCIDE";
+          statusEl.style.color = "var(--danger)";
+          detailEl.textContent = "El JSON no coincide con el hash esperado. No confíe en esta copia.";
+        }
+      } catch (err) {
+        statusEl.textContent = "NO VERIFICABLE AQUÍ";
+        statusEl.style.color = "var(--warn)";
+        detailEl.textContent =
+          "Fetch bloqueado (p.ej. file://). Sirva la carpeta por HTTP (npx serve) o GitHub Pages y recargue. Hash esperado sigue publicado en meta + INTEGRITY.txt. " +
+          String(err.message || err);
+        computedEl.textContent = "(sin cálculo — abra vía servidor local)";
+      }
+    }
+    verifyIntegrity();
+
+    // —— Utilidades estadísticas ——
+    function logFact(n) {
+      let s = 0;
+      for (let i = 2; i <= n; i++) s += Math.log(i);
+      return s;
+    }
+    function binomPMF(k, n, p) {
+      if (p <= 0) return k === 0 ? 1 : 0;
+      if (p >= 1) return k === n ? 1 : 0;
+      const logC = logFact(n) - logFact(k) - logFact(n - k);
+      return Math.exp(logC + k * Math.log(p) + (n - k) * Math.log(1 - p));
+    }
+    function binomCDF(k, n, p) {
+      let s = 0;
+      for (let i = 0; i <= k; i++) s += binomPMF(i, n, p);
+      return s;
+    }
+    // P(X <= 9 | n=15, p=0.95)
+    console.log("[Paradoja] P(<=9 Ligas | p=0.95 compra dura) ≈", binomCDF(9, 15, 0.95).toExponential(3));
+    console.log("[Paradoja] P(<=9 Ligas | p=0.60 dominio) ≈", binomCDF(9, 15, 0.6).toFixed(3));
+
+    // —— Filtro hipótesis ——
+    document.querySelectorAll("#hypFilters button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#hypFilters button").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const f = btn.dataset.filter;
+        document.querySelectorAll("#hypGrid .hyp").forEach((el) => {
+          el.style.display = f === "all" || el.dataset.level === f ? "" : "none";
+        });
+      });
+    });
+
+    // —— Charts (canvas puro, sin libs) ——
+    function drawBars(canvasId, labels, series, colors) {
+      const c = document.getElementById(canvasId);
+      const ctx = c.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      const w = c.parentElement.clientWidth - 32;
+      const h = 220;
+      c.width = w * dpr;
+      c.height = h * dpr;
+      c.style.width = w + "px";
+      c.style.height = h + "px";
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, w, h);
+      const pad = { t: 20, r: 16, b: 40, l: 40 };
+      const flat = series.flat();
+      const rawMax = Math.max(...flat, 0);
+      const rawMin = Math.min(...flat, 0);
+      const span = (rawMax - rawMin) * 1.15 || 1;
+      const n = labels.length;
+      const groupW = (w - pad.l - pad.r) / n;
+      const barW = (groupW * 0.7) / series.length;
+      const plotH = h - pad.t - pad.b;
+      const zeroY = pad.t + (rawMax / span) * plotH;
+
+      ctx.strokeStyle = "#2a3441";
+      ctx.beginPath();
+      ctx.moveTo(pad.l, pad.t);
+      ctx.lineTo(pad.l, h - pad.b);
+      ctx.lineTo(w - pad.r, h - pad.b);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pad.l, zeroY);
+      ctx.lineTo(w - pad.r, zeroY);
+      ctx.stroke();
+
+      labels.forEach((lab, i) => {
+        series.forEach((s, si) => {
+          const val = s[i];
+          const bh = (plotH * Math.abs(val)) / span;
+          const x = pad.l + i * groupW + groupW * 0.15 + si * barW;
+          const y = val >= 0 ? zeroY - bh : zeroY;
+          ctx.fillStyle = colors[si];
+          ctx.fillRect(x, y, barW - 2, bh);
+        });
+        ctx.fillStyle = "#8b9aab";
+        ctx.font = "11px DM Sans";
+        ctx.textAlign = "center";
+        ctx.fillText(lab, pad.l + i * groupW + groupW / 2, h - 14);
+      });
+    }
+
+    function drawLine(canvasId, labels, data, color) {
+      const c = document.getElementById(canvasId);
+      const ctx = c.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      const w = c.parentElement.clientWidth - 32;
+      const h = 220;
+      c.width = w * dpr;
+      c.height = h * dpr;
+      c.style.width = w + "px";
+      c.style.height = h + "px";
+      ctx.scale(dpr, dpr);
+      const pad = { t: 24, r: 20, b: 40, l: 44 };
+      const max = 100;
+      ctx.strokeStyle = "#2a3441";
+      ctx.beginPath();
+      ctx.moveTo(pad.l, pad.t);
+      ctx.lineTo(pad.l, h - pad.b);
+      ctx.lineTo(w - pad.r, h - pad.b);
+      ctx.stroke();
+
+      // observed line
+      ctx.strokeStyle = "#e07a3a";
+      ctx.setLineDash([4, 4]);
+      const yObs = pad.t + (1 - 60 / max) * (h - pad.t - pad.b);
+      ctx.beginPath();
+      ctx.moveTo(pad.l, yObs);
+      ctx.lineTo(w - pad.r, yObs);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = "#e07a3a";
+      ctx.font = "11px DM Sans";
+      ctx.fillText("Observado 60%", w - pad.r - 90, yObs - 6);
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      data.forEach((v, i) => {
+        const x = pad.l + (i / (data.length - 1)) * (w - pad.l - pad.r);
+        const y = pad.t + (1 - v / max) * (h - pad.t - pad.b);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      labels.forEach((lab, i) => {
+        const x = pad.l + (i / (labels.length - 1)) * (w - pad.l - pad.r);
+        ctx.fillStyle = "#8b9aab";
+        ctx.font = "10px DM Sans";
+        ctx.textAlign = "center";
+        ctx.fillText(lab, x, h - 14);
+      });
+    }
+
+    // Intensidad 0–1 → P(campeón) aproximada
+    const intensLabels = ["0 nula", "0.25 blanda", "0.5 media", "0.75 fuerte", "1.0 dura"];
+    const intensP = [55, 62, 72, 85, 95]; // % esperado de Ligas
+    drawLine("chartParadoja", intensLabels, intensP, "#5b9fd4");
+
+    drawBars(
+      "chartTitulos",
+      ["Ligas", "Copas", "Supercopas", "Total"],
+      [
+        [9, 6, 8, 23],
+        [4, 2, 3, 9],
+      ],
+      ["#5b9fd4", "#c9a227"]
+    );
+
+    drawBars(
+      "chartSaldo",
+      ["Saldo pen", "Saldo rojas", "Pts pen*", "Pts rojas*"],
+      [
+        [68, 43, 88, 61],
+        [60, -5, 125, 36],
+      ],
+      ["#5b9fd4", "#c9a227"]
+    );
+
+    drawBars(
+      "chartRoles",
+      ["Pres. RFEF", "Pres. CTA", "Comisión desig.", "VP Negreira", "Empresas"],
+      [
+        [9, 8, 9, 2, 0], // designación directa
+        [7, 9, 5, 7, 6], // influencia indirecta
+      ],
+      ["#e07a3a", "#7eb8da"]
+    );
+
+    window.addEventListener("resize", () => {
+      drawLine("chartParadoja", intensLabels, intensP, "#5b9fd4");
+      drawBars("chartTitulos", ["Ligas", "Copas", "Supercopas", "Total"], [[9, 6, 8, 23], [4, 2, 3, 9]], ["#5b9fd4", "#c9a227"]);
+      drawBars("chartSaldo", ["Saldo pen", "Saldo rojas", "Pts pen*", "Pts rojas*"], [[68, 43, 88, 61], [60, -5, 125, 36]], ["#5b9fd4", "#c9a227"]);
+      drawBars("chartRoles", ["Pres. RFEF", "Pres. CTA", "Comisión desig.", "VP Negreira", "Empresas"], [[9, 8, 9, 2, 0], [7, 9, 5, 7, 6]], ["#e07a3a", "#7eb8da"]);
+    });
+  </script>
+</body>
+</html>
