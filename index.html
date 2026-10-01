@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="dataset-sha256" content="0bc66188100968954d356cee09911748866e71e549b6b11e0007b8857210e42a" />
+  <meta name="dataset-sha256" content="3ded6d9d82c6ae9ed12169cf09e0ad666a1bb3070d16d4753491baf3370f644b" />
   <title>Observatorio arbitral · LaLiga 2001–2018</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -56,15 +56,15 @@
     h3 { font-size: 1.02rem; margin: 18px 0 8px; }
     .lead { color: var(--muted); max-width: 68ch; margin: 0 0 18px; }
     .sub { color: var(--muted); margin: 0 0 14px; max-width: 70ch; }
-    section { margin: 42px 0; scroll-margin-top: 72px; }
-    .grid { display: grid; gap: 12px; }
+    section { margin: 56px 0; scroll-margin-top: 72px; padding-bottom: 8px; }
+    .grid { display: grid; gap: 16px; }
     .g2 { grid-template-columns: repeat(2, 1fr); }
     .g3 { grid-template-columns: repeat(3, 1fr); }
     .g4 { grid-template-columns: repeat(4, 1fr); }
     @media (max-width: 860px) { .g2,.g3,.g4 { grid-template-columns: 1fr; } }
     .card, .stat {
       background: var(--elev); border: 1px solid var(--line);
-      border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow);
+      border-radius: 12px; padding: 16px 18px; box-shadow: var(--shadow);
     }
     .stat .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
     .stat .val { font-family: Fraunces, Georgia, serif; font-size: 1.8rem; margin-top: 2px; }
@@ -93,31 +93,55 @@
     .map a strong { display: block; margin-bottom: 4px; }
     .map a span { color: var(--muted); font-size: 0.82rem; }
     table {
-      width: 100%; border-collapse: collapse; font-size: 0.86rem;
-      background: var(--elev); border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      font-size: 0.9rem; background: var(--elev);
     }
-    th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-    th { background: var(--soft); color: var(--muted); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: .03em; position: sticky; top: 56px; }
+    th, td {
+      padding: 12px 14px; border-bottom: 1px solid var(--line);
+      text-align: left; vertical-align: middle; white-space: nowrap;
+    }
+    th {
+      background: var(--soft); color: var(--muted); font-weight: 600;
+      font-size: 0.74rem; text-transform: uppercase; letter-spacing: .03em;
+      position: sticky; top: 0; z-index: 1;
+    }
+    td.num { font-variant-numeric: tabular-nums; text-align: right; }
     tr:last-child td { border-bottom: 0; }
-    .scroll { overflow: auto; max-height: 420px; border-radius: 12px; border: 1px solid var(--line); }
-    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+    .scroll {
+      overflow: auto; max-height: 520px; border-radius: 12px;
+      border: 1px solid var(--line); margin-bottom: 28px; background: var(--elev);
+    }
+    .table-block { margin: 0 0 32px; }
+    .table-block h3 { margin-top: 0; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; align-items: center; }
     .filters button.active { border-color: var(--accent); color: var(--text); }
     .callout {
       border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--elev));
-      padding: 12px 14px; border-radius: 0 10px 10px 0; margin: 12px 0;
+      padding: 14px 16px; border-radius: 0 10px 10px 0; margin: 16px 0 24px;
     }
-    .timeline { display: grid; gap: 10px; }
+    .timeline { display: grid; gap: 14px; }
     .tl {
-      display: grid; grid-template-columns: 110px 1fr; gap: 12px;
-      background: var(--elev); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+      display: grid; grid-template-columns: 120px 1fr; gap: 14px;
+      background: var(--elev); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px;
     }
     @media (max-width: 600px) { .tl { grid-template-columns: 1fr; } }
     .tl .when { color: var(--muted); font-size: 0.82rem; }
-    footer { border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 0.8rem; }
+    footer { border-top: 1px solid var(--line); padding-top: 18px; color: var(--muted); font-size: 0.8rem; margin-top: 40px; }
     .tiny { font-size: 0.78rem; color: var(--muted); }
-    .chart { background: var(--elev); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+    .chart {
+      background: var(--elev); border: 1px solid var(--line); border-radius: 12px;
+      padding: 16px; margin-bottom: 28px;
+    }
     canvas { width: 100% !important; }
-    .null { color: var(--muted); opacity: .7; }
+    .null { color: var(--muted); opacity: .75; font-style: italic; }
+    .legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 16px; font-size: 0.85rem; color: var(--muted); }
+    .legend-row b { color: var(--text); font-weight: 600; }
+    .glossary {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 28px;
+    }
+    @media (max-width: 860px) { .glossary { grid-template-columns: 1fr; } }
+    .glossary dt { font-weight: 700; font-size: 0.88rem; }
+    .glossary dd { margin: 2px 0 0; color: var(--muted); font-size: 0.84rem; }
   </style>
 </head>
 <body>
@@ -146,13 +170,15 @@
       <nav class="map" aria-label="Mapa del observatorio">
         <a href="#conclusiones"><strong>1. Conclusiones</strong><span>Qué se puede afirmar con rigor</span></a>
         <a href="#uefa"><strong>2. UEFA / Negreira</strong><span>Denuncia Madrid · expediente</span></a>
-        <a href="#polemicas"><strong>3. Polémicas</strong><span>Línea de tiempo rastreada</span></a>
-        <a href="#brutos"><strong>4. Datos brutos</strong><span>Posesión, tiros, goles, penaltis</span></a>
-        <a href="#arbitral"><strong>5. Saldo arbitral</strong><span>Penaltis y rojas Opta</span></a>
-        <a href="#ffp"><strong>6. FFP auditoría</strong><span>Banderas rojas / naranjas</span></a>
-        <a href="#prensa"><strong>7. Prensa</strong><span>Sesgo Marca-AS vs MD-Sport</span></a>
-        <a href="#hipotesis"><strong>8. Hipótesis</strong><span>Por qué no todas las Ligas</span></a>
-        <a href="#fuentes"><strong>9. Fuentes</strong><span>Enlaces y sellado técnico</span></a>
+        <a href="#dominio"><strong>3. Posesión y dominio</strong><span>Cómo afecta a las rojas</span></a>
+        <a href="#polemicas"><strong>4. Polémicas (Liga + Champions)</strong><span>Barça y Madrid, ambos lados</span></a>
+        <a href="#brutos"><strong>5. Datos brutos</strong><span>Tablas claras por club</span></a>
+        <a href="#arbitral"><strong>6. Saldo arbitral</strong><span>Penaltis y rojas Opta</span></a>
+        <a href="#ffp"><strong>7. FFP</strong><span>Banderas rojas / naranjas</span></a>
+        <a href="#prensa"><strong>8. Prensa</strong><span>Sesgo de diarios</span></a>
+        <a href="#hipotesis"><strong>9. Hipótesis</strong><span>Por qué no todas las Ligas</span></a>
+        <a href="#fuentes"><strong>10. Fuentes</strong><span>Enlaces</span></a>
+        <a href="#glosario"><strong>Glosario</strong><span>Qué significa cada dato</span></a>
       </nav>
     </section>
 
@@ -170,7 +196,7 @@
       <h2>Proceso UEFA · alegaciones del Real Madrid</h2>
       <p class="sub">Estado a 1 oct 2026 según comunicados públicos (no es fallo disciplinario final).</p>
       <div class="grid g3" id="uefaStats"></div>
-      <div class="grid g2" style="margin-top:12px">
+      <div class="grid g2" style="margin-top:16px">
         <div class="card">
           <h3>Qué alega el Real Madrid</h3>
           <ul>
@@ -193,14 +219,32 @@
       </div>
     </section>
 
+    <section id="dominio">
+      <h2>Posesión y dominio del partido</h2>
+      <p class="sub" id="dominioResumen"></p>
+      <div class="grid g2" id="dominioPoints"></div>
+      <div class="callout">
+        <strong>Lectura imparcial:</strong> más posesión suele generar más faltas del rival (y más tarjetas a rivales).
+        Eso empuja el saldo de rojas del Barça al alza de forma “orgánica”. El Madrid, más vertical y con zaga agresiva,
+        acumula más rojas propias. Aun así, recibir más faltas netas y salir con saldo de rojas negativo es la anomalía
+        que el solo estilo no explica del todo.
+      </div>
+    </section>
+
+    <section id="glosario">
+      <h2>Glosario · para entender las tablas</h2>
+      <dl class="glossary" id="glosarioBox"></dl>
+    </section>
+
     <section id="polemicas">
-      <h2>Polémicas rastreadas</h2>
-      <p class="sub">Filtro por severidad. Roja = indiciario grave documentado; naranja = polémica relevante; info = contexto.</p>
+      <h2>Polémicas rastreadas (LaLiga + Champions)</h2>
+      <p class="sub">Incluye casos reclamados <strong>a favor del Barça</strong> y <strong>a favor del Madrid</strong>. Roja = indiciario grave documentado; naranja = polémica relevante; info = contexto.</p>
       <div class="filters" id="polFilters">
         <button class="btn active" data-f="all">Todas</button>
-        <button class="btn" data-f="roja">Rojas</button>
+        <button class="btn" data-f="UCL">Solo Champions</button>
+        <button class="btn" data-f="LaLiga">Solo Liga</button>
+        <button class="btn" data-f="roja">Severidad roja</button>
         <button class="btn" data-f="naranja">Naranjas</button>
-        <button class="btn" data-f="info">Contexto</button>
       </div>
       <div class="timeline" id="polTimeline"></div>
     </section>
@@ -208,43 +252,64 @@
     <section id="brutos">
       <h2>Datos brutos por temporada (LaLiga)</h2>
       <p class="sub">
-        Penaltis/rojas: Futbolgate. Goles: tablas Liga. Posesión/tiros/SoT: FBref/AS cuando existe.
-        <span class="null">n/d</span> = no localizado en fuente abierta (no inventamos).
-        Goles de falta directa por temporada: serie completa no disponible en abierto → n/d.
+        Tablas separadas por club para que no se mezclen los números.
+        <span class="null">n/d</span> = dato no encontrado en fuente abierta (no lo inventamos).
       </p>
+      <div class="legend-row">
+        <span><b style="color:var(--barca)">Azul</b> = Barcelona</span>
+        <span><b style="color:var(--madrid)">Dorado</b> = Real Madrid</span>
+        <span>Pen. a favor = penaltis que le pitan <em>a él</em></span>
+        <span>Pen. en contra = penaltis que le pitan <em>en su área</em></span>
+      </div>
       <div class="filters">
-        <label class="tiny">Filtrar temporada:
+        <label class="tiny">Temporada
           <select id="tempFilter" class="btn" style="margin-left:6px"></select>
         </label>
       </div>
-      <div class="scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Temp</th>
-              <th>Posesión B/M %</th>
-              <th>Tiros B/M</th>
-              <th>SoT B/M</th>
-              <th>Goles B/M</th>
-              <th>Pen F B/M</th>
-              <th>Pen C B/M</th>
-              <th>Rojas B/M</th>
-              <th>Rojas riv B/M</th>
-              <th>Fuente</th>
-            </tr>
-          </thead>
-          <tbody id="brutosBody"></tbody>
-        </table>
+
+      <div class="table-block">
+        <h3 style="color:var(--barca)">Barcelona — LaLiga</h3>
+        <div class="scroll"><table><thead>
+          <tr>
+            <th>Temporada</th>
+            <th>Posesión %</th>
+            <th>Tiros</th>
+            <th>A puerta</th>
+            <th>Goles</th>
+            <th>Pen. a favor</th>
+            <th>Pen. en contra</th>
+            <th>Expulsiones propias</th>
+            <th>Expulsiones rivales</th>
+          </tr>
+        </thead><tbody id="brutosBarca"></tbody></table></div>
       </div>
-      <div class="chart" style="margin-top:12px">
+
+      <div class="table-block">
+        <h3 style="color:var(--madrid)">Real Madrid — LaLiga</h3>
+        <div class="scroll"><table><thead>
+          <tr>
+            <th>Temporada</th>
+            <th>Posesión %</th>
+            <th>Tiros</th>
+            <th>A puerta</th>
+            <th>Goles</th>
+            <th>Pen. a favor</th>
+            <th>Pen. en contra</th>
+            <th>Expulsiones propias</th>
+            <th>Expulsiones rivales</th>
+          </tr>
+        </thead><tbody id="brutosMadrid"></tbody></table></div>
+      </div>
+
+      <div class="chart">
         <canvas id="chartGoles" height="220"></canvas>
-        <p class="tiny">Goles LaLiga por temporada (cuando hay dato). Azul = Barça · Dorado = Madrid.</p>
+        <p class="tiny">Goles LaLiga por temporada (cuando hay dato).</p>
       </div>
-      <div class="chart" style="margin-top:12px">
+      <div class="chart">
         <canvas id="chartPen" height="220"></canvas>
-        <p class="tiny">Penaltis a favor por temporada (Futbolgate). Pico 15/16 Barça = 19.</p>
+        <p class="tiny">Penaltis a favor por temporada. Pico Barça 15/16 = 19.</p>
       </div>
-      <div class="card" style="margin-top:12px">
+      <div class="card">
         <h3>Clásicos · muestra disciplinaria</h3>
         <p id="clasicoTxt"></p>
       </div>
@@ -252,21 +317,22 @@
 
     <section id="arbitral">
       <h2>Saldo arbitral agregado (Opta 03/04–17/18)</h2>
+      <p class="sub"><b>Saldo de penaltis</b> = a favor − en contra. <b>Saldo de rojas</b> = expulsiones del rival − propias. Positivo = más favorable.</p>
       <div class="grid g4" id="optaStats"></div>
-      <div class="chart" style="margin-top:12px"><canvas id="chartOpta" height="200"></canvas></div>
+      <div class="chart" style="margin-top:16px"><canvas id="chartOpta" height="200"></canvas></div>
     </section>
 
     <section id="ffp">
       <h2>Auditoría FFP · banderas</h2>
       <div class="scroll">
         <table>
-          <thead><tr><th>ID</th><th>Sev</th><th>Club</th><th>Claim</th><th>Verificación</th></tr></thead>
+          <thead><tr><th>ID</th><th>Severidad</th><th>Club</th><th>Qué se afirma</th><th>Cómo comprobarlo</th></tr></thead>
           <tbody>
             <tr><td>FFP-R01</td><td><span class="pill r">ROJA</span></td><td>Barça</td><td>Pagos Negreira 2001–18</td><td>Fiscalía / AEAT</td></tr>
-            <tr><td>FFP-R02</td><td><span class="pill r">ROJA</span></td><td>Barça</td><td>Misclass. ~267 M€ UEFA</td><td>CAS / CFCB</td></tr>
-            <tr><td>FFP-R03</td><td><span class="pill r">ROJA</span></td><td>Barça</td><td>Settlement CLFS 15–60 M€</td><td>PDF UEFA 2025</td></tr>
+            <tr><td>FFP-R02</td><td><span class="pill r">ROJA</span></td><td>Barça</td><td>Clasificación incorrecta ~267 M€ ante UEFA</td><td>CAS / CFCB</td></tr>
+            <tr><td>FFP-R03</td><td><span class="pill r">ROJA</span></td><td>Barça</td><td>Acuerdo FFP 15–60 M€ (2025)</td><td>PDF UEFA</td></tr>
             <tr><td>FFP-N03</td><td><span class="pill o">NARANJA</span></td><td>Madrid</td><td>Deuda bruta alta 2013/14</td><td>Memorias / AS</td></tr>
-            <tr><td>FFP-N04</td><td><span class="pill o">NARANJA</span></td><td>Madrid</td><td>Flujos futuros Bernabéu</td><td>Posición UEFA reportada</td></tr>
+            <tr><td>FFP-N04</td><td><span class="pill o">NARANJA</span></td><td>Madrid</td><td>Venta de ingresos futuros Bernabéu</td><td>Posición UEFA reportada</td></tr>
           </tbody>
         </table>
       </div>
@@ -275,28 +341,28 @@
     <section id="prensa">
       <h2>Sesgo de prensa (estudios)</h2>
       <div class="grid g2">
-        <div class="stat"><div class="lbl">Marca + AS → Madrid (fichajes portada)</div><div class="val" style="color:var(--madrid)">83%</div><div class="hint">MDPI 2015–19</div></div>
-        <div class="stat"><div class="lbl">MD + Sport → Barça</div><div class="val" style="color:var(--barca)">95%</div><div class="hint">MDPI 2015–19</div></div>
+        <div class="stat"><div class="lbl">Marca + AS → foco Madrid (portadas fichajes)</div><div class="val" style="color:var(--madrid)">83%</div><div class="hint">Estudio MDPI 2015–19</div></div>
+        <div class="stat"><div class="lbl">Mundo Deportivo + Sport → foco Barça</div><div class="val" style="color:var(--barca)">95%</div><div class="hint">Estudio MDPI 2015–19</div></div>
       </div>
-      <p class="tiny" style="margin-top:10px">Implicación: no uses un solo diario como “prueba” del caso.</p>
+      <p class="tiny" style="margin-top:12px">Implicación: no uses un solo diario como “prueba” del caso.</p>
     </section>
 
     <section id="hipotesis">
       <h2>Hipótesis · ¿por qué no todas las Ligas?</h2>
       <div class="grid g3">
-        <div class="card"><span class="pill r">H1 2/10</span><h3>Compra dura</h3><p class="tiny">Predice ~15/15. Observado 9/15 → rechazada como explicación principal.</p></div>
-        <div class="card"><span class="pill g">H2 8/10</span><h3>Seguro / info / disciplina</h3><p class="tiny">Compatible con pagos + saldos + no monopolio de títulos.</p></div>
-        <div class="card"><span class="pill g">H6 9/10</span><h3>Combinada</h3><p class="tiny">H2 + dominio deportivo + polarización mediática.</p></div>
+        <div class="card"><span class="pill r">H1 · 2/10</span><h3>Compra dura de títulos</h3><p class="tiny">Si compraran campeonatos, esperaríamos casi todas las Ligas. Hubo 9 de 15 → esta tesis no encaja como explicación principal.</p></div>
+        <div class="card"><span class="pill g">H2 · 8/10</span><h3>Seguro / información / disciplina</h3><p class="tiny">Compatible con pagos + saldos disciplinarios + no monopolio de títulos.</p></div>
+        <div class="card"><span class="pill g">H6 · 9/10</span><h3>Combinada (la más razonable)</h3><p class="tiny">Ventaja blanda + dominio deportivo (Messi/Pep) + polarización mediática.</p></div>
       </div>
     </section>
 
     <section id="fuentes">
       <h2>Fuentes</h2>
       <ul class="tiny">
-        <li>AS/Opta · Futbolgate · Marca Informe Negreira · Relevo · El Confidencial</li>
-        <li>FBref (tiros/SoT 08/09 y 17/18) · MDPI prensa · UEFA Settlement · CAS</li>
+        <li>AS/Opta · Futbolgate · Marca Informe Negreira · Relevo · El Confidencial · El Español</li>
+        <li>Champions: AS, ABC, El Tiempo, Nació/Sportsmail (Ovrebo)</li>
+        <li>FBref (tiros/a puerta) · MDPI prensa · UEFA Settlement · CAS</li>
         <li>Comunicados Real Madrid / UEFA / posición Barça (oct 2026)</li>
-        <li>Dataset: <code>data/canonical-dataset.json</code> · integridad técnica opcional (no bloquea la lectura)</li>
       </ul>
     </section>
 

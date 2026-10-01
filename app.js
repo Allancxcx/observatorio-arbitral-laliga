@@ -75,24 +75,67 @@
     ].map(([l, v]) => `<div class="stat"><div class="lbl">${l}</div><div class="val" style="font-size:1.25rem">${v}</div></div>`).join("");
   }
 
+  function renderDominio(data) {
+    const d = data.posesion_dominio;
+    if (!d) return;
+    const res = $("#dominioResumen");
+    if (res) res.textContent = d.resumen || "";
+    const box = $("#dominioPoints");
+    if (box) {
+      box.innerHTML = (d.puntos || []).map((p) =>
+        `<div class="card"><p style="margin:0">${p}</p></div>`
+      ).join("");
+    }
+  }
+
+  function renderGlosario(data) {
+    const g = data.glosario || {};
+    const labels = {
+      posesion: "Posesión %",
+      tiros: "Tiros",
+      sot: "A puerta (SoT)",
+      goles: "Goles",
+      pen_favor: "Penaltis a favor",
+      pen_contra: "Penaltis en contra",
+      rojas_propias: "Expulsiones propias",
+      rojas_rivales: "Expulsiones del rival",
+      saldo_pen: "Saldo de penaltis",
+      saldo_rojas: "Saldo de rojas",
+      n_d: "n/d",
+    };
+    const box = $("#glosarioBox");
+    if (!box) return;
+    box.innerHTML = Object.keys(g).map((k) =>
+      `<div class="card"><dt>${labels[k] || k}</dt><dd>${g[k]}</dd></div>`
+    ).join("");
+  }
+
   function renderPolemicas(data) {
     const list = data.polemicas || [];
     const host = $("#polTimeline");
     function paint(filter) {
       host.innerHTML = list
-        .filter((p) => filter === "all" || p.severidad === filter)
+        .filter((p) => {
+          if (filter === "all") return true;
+          if (filter === "UCL") return p.comp === "UCL";
+          if (filter === "LaLiga") return p.comp === "LaLiga";
+          return p.severidad === filter;
+        })
         .map((p) => {
           const sev = p.severidad === "roja" ? "r" : p.severidad === "naranja" ? "o" : "g";
           return `<article class="tl">
-            <div class="when">${p.fecha}<br><span class="pill ${sev}">${p.severidad}</span></div>
+            <div class="when">${p.fecha}<br>
+              <span class="pill ${sev}">${p.severidad}</span>
+              ${p.comp ? `<span class="pill">${p.comp}</span>` : ""}
+            </div>
             <div>
               <strong>${p.titulo}</strong>
               <div class="tiny">${p.clubes}</div>
-              <p style="margin:6px 0">${p.resumen}</p>
+              <p style="margin:8px 0">${p.resumen}</p>
               <div class="tiny">Fuente: ${p.fuente}</div>
             </div>
           </article>`;
-        }).join("");
+        }).join("") || `<p class="tiny">Sin resultados para este filtro.</p>`;
     }
     paint("all");
     $all("#polFilters button").forEach((btn) => {
@@ -106,6 +149,11 @@
 
   let chartState = { data: null };
 
+  function cell(v) {
+    if (v === null || v === undefined) return '<td class="num null">n/d</td>';
+    return `<td class="num">${v}</td>`;
+  }
+
   function renderBrutos(data) {
     const rows = data.laliga_temporada || [];
     chartState.data = data;
@@ -114,17 +162,27 @@
 
     function paint(temp) {
       const filtered = temp === "all" ? rows : rows.filter((r) => r.temp === temp);
-      $("#brutosBody").innerHTML = filtered.map((r) => `<tr>
+      $("#brutosBarca").innerHTML = filtered.map((r) => `<tr>
         <td>${r.temp}</td>
-        <td>${pair(r.bcn_poss, r.mad_poss)}</td>
-        <td>${pair(r.bcn_shots, r.mad_shots)}</td>
-        <td>${pair(r.bcn_sot, r.mad_sot)}</td>
-        <td>${pair(r.bcn_goles, r.mad_goles)}</td>
-        <td>${pair(r.bcn_pen_f, r.mad_pen_f)}</td>
-        <td>${pair(r.bcn_pen_c, r.mad_pen_c)}</td>
-        <td>${pair(r.bcn_roj, r.mad_roj)}</td>
-        <td>${pair(r.bcn_roj_riv, r.mad_roj_riv)}</td>
-        <td class="tiny">${r.fuente}</td>
+        ${cell(r.bcn_poss)}
+        ${cell(r.bcn_shots)}
+        ${cell(r.bcn_sot)}
+        ${cell(r.bcn_goles)}
+        ${cell(r.bcn_pen_f)}
+        ${cell(r.bcn_pen_c)}
+        ${cell(r.bcn_roj)}
+        ${cell(r.bcn_roj_riv)}
+      </tr>`).join("");
+      $("#brutosMadrid").innerHTML = filtered.map((r) => `<tr>
+        <td>${r.temp}</td>
+        ${cell(r.mad_poss)}
+        ${cell(r.mad_shots)}
+        ${cell(r.mad_sot)}
+        ${cell(r.mad_goles)}
+        ${cell(r.mad_pen_f)}
+        ${cell(r.mad_pen_c)}
+        ${cell(r.mad_roj)}
+        ${cell(r.mad_roj_riv)}
       </tr>`).join("");
     }
     paint("all");
@@ -133,7 +191,7 @@
     const c = data.clasico_muestra_rojas;
     if (c) {
       $("#clasicoTxt").textContent =
-        `En ~${c.periodo_aprox}: rojas Madrid ${c.rojas_madrid} vs Barça ${c.rojas_barca}. Fuente: ${c.fuente}.`;
+        `En una muestra de ${c.periodo_aprox}: el Real Madrid acumuló ${c.rojas_madrid} expulsiones y el Barcelona ${c.rojas_barca}. Fuente: ${c.fuente}.`;
     }
   }
 
@@ -141,9 +199,9 @@
     const o = data.opta_0304_1718;
     if (!o) return;
     $("#optaStats").innerHTML = [
-      ["Saldo pen Barça", "+" + o.barcelona.saldo_pen, "var(--barca)"],
-      ["Saldo pen Madrid", "+" + o.real_madrid.saldo_pen, "var(--madrid)"],
-      ["Saldo rojas Barça", "+" + o.barcelona.saldo_rojas, "var(--barca)"],
+      ["Saldo penaltis Barça (a favor − en contra)", "+" + o.barcelona.saldo_pen, "var(--barca)"],
+      ["Saldo penaltis Madrid", "+" + o.real_madrid.saldo_pen, "var(--madrid)"],
+      ["Saldo rojas Barça (rivales − propias)", "+" + o.barcelona.saldo_rojas, "var(--barca)"],
       ["Saldo rojas Madrid", String(o.real_madrid.saldo_rojas), "var(--danger)"],
     ].map(([l, v, c]) => `<div class="stat"><div class="lbl">${l}</div><div class="val" style="color:${c}">${v}</div></div>`).join("");
   }
@@ -213,6 +271,8 @@
       const data = await loadData();
       renderConclusiones(data);
       renderUefa(data);
+      renderDominio(data);
+      renderGlosario(data);
       renderPolemicas(data);
       renderBrutos(data);
       renderOpta(data);

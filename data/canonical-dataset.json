@@ -1,11 +1,33 @@
 {
   "meta": {
     "title": "Observatorio arbitral LaLiga — dataset canónico v2",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "generated": "2026-10-01",
     "immutable": true,
-    "competencia_principal": "LaLiga",
-    "nota": "Campos null = no localizado en fuente abierta verificable. No inventar."
+    "competencia_principal": "LaLiga + Champions (polémicas)",
+    "nota": "Campos null = no localizado en fuente abierta verificable. No inventar. B = Barcelona, M = Real Madrid."
+  },
+  "glosario": {
+    "posesion": "% del tiempo con el balón. Más posesión = más dominio territorial típico.",
+    "tiros": "Remates totales (a puerta + fuera + bloqueados).",
+    "sot": "Shots on Target = tiros a puerta (entre los tres palos).",
+    "goles": "Goles marcados en LaLiga esa temporada.",
+    "pen_favor": "Penaltis pitados A FAVOR del equipo.",
+    "pen_contra": "Penaltis pitados EN CONTRA del equipo.",
+    "rojas_propias": "Expulsiones de jugadores del propio equipo.",
+    "rojas_rivales": "Expulsiones de jugadores del rival (a favor del equipo).",
+    "saldo_pen": "Penaltis a favor menos penaltis en contra.",
+    "saldo_rojas": "Rojas a rivales menos rojas propias.",
+    "n_d": "Dato no disponible en fuente abierta contrastada (no inventado)."
+  },
+  "posesion_dominio": {
+    "resumen": "El Barça del periodo Guardiola-Luis Enrique suele liderar posesión; el Madrid combina posesión alta vs media tabla con más verticalidad. Dominio explica parte de las faltas rivales y, por tanto, parte de las rojas a rivales; no explica por sí solo un saldo de rojas negativo del Madrid pese a recibir más faltas netas.",
+    "puntos": [
+      "Posesión alta → rivales hacen más faltas al recuperar → más amarillas/rojas rivales esperadas.",
+      "Madrid: zaga agresiva (Ramos/Pepe) → más rojas propias esperadas por estilo.",
+      "Control empírico: Athletic/Atlético (menos posesión) a veces mejor saldo de rojas que el Madrid → la posesión no cierra el gap.",
+      "15/16 Barça con ~64,5% posesión (menos que Guardiola ~72–73%) y pico extremo de penaltis (+18) → estilo no basta para explicar ese pico."
+    ]
   },
   "conclusiones_imparciales": [
     "Hay hechos acreditados (pagos Barça→Negreira) y hechos sancionados UEFA (reporting FFP). Eso no equivale automáticamente a amaño de cada título.",
@@ -76,18 +98,26 @@
     "fuente": "El Español / El Bernabéu"
   },
   "polemicas": [
-    {"fecha":"2004-11","titulo":"Elecciones RFEF / apoyo Laporta a Villar","clubes":"Sistema","severidad":"naranja","resumen":"Origen mediático del relato 'Villarato'.","fuente":"Wikipedia Villarato / hemeroteca"},
-    {"fecha":"2009-2011","titulo":"Clásicos Guardiola–Mourinho","clubes":"Ambos","severidad":"naranja","resumen":"Alta tensión arbitral; expulsiones asimétricas en Clásicos.","fuente":"El Español 2018"},
-    {"fecha":"2011-12","titulo":"Mejor saldo arbitral Madrid (tramo Mourinho)","clubes":"Madrid","severidad":"info","resumen":"Futbolgate: temporada con saldo más favorable blanco del periodo.","fuente":"Futbolgate"},
-    {"fecha":"2013-14","titulo":"Mateu / gol Messi vs Atlético (Liga)","clubes":"Barça","severidad":"naranja","resumen":"Error citado por Marca que perjudicó al Barça; Atlético campeón.","fuente":"Marca Informe"},
-    {"fecha":"2015-16","titulo":"19 penaltis a favor Barça / 1 en contra","clubes":"Barça","severidad":"roja","resumen":"Pico histórico; Liga por 1 punto.","fuente":"AS/Opta / Futbolgate"},
-    {"fecha":"2016-03→2018-03","titulo":"78 partidos sin penalti en contra Barça","clubes":"Barça","severidad":"roja","resumen":"Racha rota por Mateu (Las Palmas).","fuente":"ABC / Marca"},
-    {"fecha":"2017","titulo":"Filtración Clos Gómez final Copa (meses antes)","clubes":"Barça","severidad":"roja","resumen":"Entorno Negreira avisó designación con antelación.","fuente":"El Confidencial / El Español"},
-    {"fecha":"2018","titulo":"Fin pagos Negreira / llegada Rubiales–Velasco","clubes":"Sistema","severidad":"info","resumen":"Coincide con cese de pagos según Fiscalía.","fuente":"Fiscalía"},
-    {"fecha":"2023-02","titulo":"Estalla caso Negreira (pagos públicos)","clubes":"Barça","severidad":"roja","resumen":"AEAT/SER; club admite pagos por informes.","fuente":"SER / Fiscalía"},
-    {"fecha":"2023-07","titulo":"UEFA admite provisionalmente al Barça en competiciones","clubes":"Barça","severidad":"naranja","resumen":"Expediente disciplinario en suspenso con reserva de reanudación.","fuente":"UEFA / 20minutos"},
-    {"fecha":"2025-07","titulo":"Settlement FFP UEFA Barça (15–60 M€)","clubes":"Barça","severidad":"roja","resumen":"Incumplimiento estabilidad CLFS / reporting.","fuente":"UEFA PDF"},
-    {"fecha":"2026-06","titulo":"Madrid pide a UEFA reactivar expediente Negreira","clubes":"Madrid→UEFA","severidad":"roja","resumen":"Riesgo sistémico de integridad según el club.","fuente":"AS"},
-    {"fecha":"2026-10-01","titulo":"UEFA confirma recepción dossier Madrid (~500 págs.)","clubes":"Ambos/UEFA","severidad":"roja","resumen":"Inspectores incorporan docs a investigación en curso. Barça: no es expediente nuevo.","fuente":"Comunicados UEFA/RM/Barça"}
+    {"fecha":"2004-11","comp":"RFEF","titulo":"Elecciones RFEF / apoyo Laporta a Villar","clubes":"Sistema","severidad":"naranja","resumen":"Origen mediático del relato 'Villarato'.","fuente":"Wikipedia Villarato / hemeroteca"},
+    {"fecha":"2009-05","comp":"UCL","titulo":"Chelsea–Barça (semis) · Ovrebo","clubes":"Barça beneficiado (reclamación Chelsea)","severidad":"roja","resumen":"Varios penaltis no pitados al Chelsea; Abidal expulsado; Iniestazo. Ovrebo admitió después que debió pitar al menos un penalti al Chelsea.","fuente":"AS / Sportsmail / Nació"},
+    {"fecha":"2009-2011","comp":"LaLiga","titulo":"Clásicos Guardiola–Mourinho","clubes":"Ambos","severidad":"naranja","resumen":"Alta tensión arbitral; expulsiones asimétricas en Clásicos.","fuente":"El Español 2018"},
+    {"fecha":"2010-03","comp":"UCL","titulo":"Arsenal–Barça · expulsión Van Persie","clubes":"Barça beneficiado (reclamación Arsenal)","severidad":"naranja","resumen":"Van Persie expulsado por demora; Barça remontó con un hombre más.","fuente":"El Español / AS"},
+    {"fecha":"2011-04","comp":"UCL","titulo":"Madrid–Barça semis ida · Stark · Pepe/Mourinho","clubes":"Barça beneficiado (reclamación Madrid)","severidad":"roja","resumen":"Expulsión de Pepe (entrada a Alves, muy discutida) y Mourinho; Barça gana 0-2. Mourinho: lista de árbitros 'Ovrebo, Stark…'.","fuente":"ABC / AS"},
+    {"fecha":"2012-04","comp":"UCL","titulo":"Barça–Milan cuartos · penalti Nesta","clubes":"Barça beneficiado (reclamación Milan)","severidad":"naranja","resumen":"Penalti con balón no en juego según Allegri/Ibrahimovic; Barça pasa.","fuente":"El Español / AS"},
+    {"fecha":"2011-12","comp":"LaLiga","titulo":"Mejor saldo arbitral Madrid (tramo Mourinho)","clubes":"Madrid","severidad":"info","resumen":"Futbolgate: temporada con saldo más favorable blanco del periodo.","fuente":"Futbolgate"},
+    {"fecha":"2013-14","comp":"LaLiga","titulo":"Mateu / gol Messi vs Atlético","clubes":"Barça perjudicado","severidad":"naranja","resumen":"Error citado por Marca que perjudicó al Barça; Atlético campeón.","fuente":"Marca Informe"},
+    {"fecha":"2014-02","comp":"UCL","titulo":"City–Barça · penalti+roja Demichelis fuera del área","clubes":"Barça beneficiado (reclamación City)","severidad":"roja","resumen":"Eriksson pita penalti y expulsión; la falta era fuera del área.","fuente":"AS"},
+    {"fecha":"2014-04","comp":"UCL","titulo":"Barça–Atlético semis · tarjetas asimétricas","clubes":"Mixto / reclamaciones cruzadas","severidad":"naranja","resumen":"Expulsión Torres; acciones no sancionadas a Busquets/Suárez según relato Atlético.","fuente":"El Español"},
+    {"fecha":"2015-16","comp":"LaLiga","titulo":"19 penaltis a favor Barça / 1 en contra","clubes":"Barça","severidad":"roja","resumen":"Pico histórico; Liga por 1 punto.","fuente":"AS/Opta / Futbolgate"},
+    {"fecha":"2016-03→2018-03","comp":"LaLiga","titulo":"78 partidos sin penalti en contra Barça","clubes":"Barça","severidad":"roja","resumen":"Racha rota por Mateu (Las Palmas).","fuente":"ABC / Marca"},
+    {"fecha":"2017-03","comp":"UCL","titulo":"Barça–PSG 6-1 · penaltis Suárez/Neymar","clubes":"Barça beneficiado (reclamación PSG)","severidad":"roja","resumen":"Penalti a Suárez muy discutido (Marquinhos); otro a Neymar también polémico. Remontada histórica.","fuente":"El Tiempo / hemeroteca"},
+    {"fecha":"2017-04","comp":"UCL","titulo":"Madrid–Bayern semis · Kassai · Vidal","clubes":"Madrid beneficiado (reclamación Bayern)","severidad":"roja","resumen":"Expulsión de Vidal en el 84'; no roja a Casemiro en acciones previas según Bayern; Madrid clasifica.","fuente":"El Tiempo / hemeroteca Champions"},
+    {"fecha":"2017","comp":"Copa","titulo":"Filtración Clos Gómez final Copa","clubes":"Barça","severidad":"roja","resumen":"Entorno Negreira avisó designación con meses de antelación.","fuente":"El Confidencial / El Español"},
+    {"fecha":"2018","comp":"Sistema","titulo":"Fin pagos Negreira / Rubiales–Velasco","clubes":"Sistema","severidad":"info","resumen":"Coincide con cese de pagos según Fiscalía.","fuente":"Fiscalía"},
+    {"fecha":"2023-02","comp":"Judicial","titulo":"Estalla caso Negreira","clubes":"Barça","severidad":"roja","resumen":"AEAT/SER; club admite pagos por informes.","fuente":"SER / Fiscalía"},
+    {"fecha":"2023-07","comp":"UEFA","titulo":"Admisión provisional Barça en competiciones UEFA","clubes":"Barça","severidad":"naranja","resumen":"Expediente en suspenso con reserva de reanudación.","fuente":"UEFA / 20minutos"},
+    {"fecha":"2025-07","comp":"UEFA FFP","titulo":"Settlement FFP Barça 15–60 M€","clubes":"Barça","severidad":"roja","resumen":"Incumplimiento estabilidad CLFS / reporting.","fuente":"UEFA PDF"},
+    {"fecha":"2026-06","comp":"UEFA","titulo":"Madrid pide reactivar expediente Negreira","clubes":"Madrid→UEFA","severidad":"roja","resumen":"Riesgo sistémico de integridad según el club.","fuente":"AS"},
+    {"fecha":"2026-10-01","comp":"UEFA","titulo":"UEFA recibe dossier Madrid (~500 págs.)","clubes":"Ambos/UEFA","severidad":"roja","resumen":"Inspectores incorporan docs. Barça: no es expediente nuevo.","fuente":"Comunicados UEFA/RM/Barça"}
   ]
 }
