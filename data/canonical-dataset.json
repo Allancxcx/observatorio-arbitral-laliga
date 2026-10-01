@@ -1,148 +1,93 @@
 {
   "meta": {
-    "title": "Observatorio arbitral LaLiga — dataset canónico",
-    "version": "1.1.0",
+    "title": "Observatorio arbitral LaLiga — dataset canónico v2",
+    "version": "2.0.0",
     "generated": "2026-10-01",
     "immutable": true,
-    "note": "Fuente de verdad publicada. Cualquier copia en el navegador es solo lectura. Verificar SHA-256 en INTEGRITY.txt"
+    "competencia_principal": "LaLiga",
+    "nota": "Campos null = no localizado en fuente abierta verificable. No inventar."
   },
+  "conclusiones_imparciales": [
+    "Hay hechos acreditados (pagos Barça→Negreira) y hechos sancionados UEFA (reporting FFP). Eso no equivale automáticamente a amaño de cada título.",
+    "En disciplina (rojas/amarillas) el balance 2003–18 favorece más al Barcelona; en penaltis agregados Opta/Marca la diferencia es menor o incluso favorable al Madrid según el corte.",
+    "Ganar 9/15 Ligas es compatible con dominio deportivo; no con un monopolio tipo compra total (H1).",
+    "La denuncia del Real Madrid ante UEFA (2026) reincorpora documentación a una investigación ya abierta en 2023; no es sentencia.",
+    "La prensa deportiva española está polarizada (Marca/AS vs MD/Sport): las narrativas deben triangularse con datos.",
+    "Posesión y volumen ofensivo explican parte —no toda— de la asimetría disciplinaria."
+  ],
   "titulos_0304_1718": {
     "barcelona": { "ligas": 9, "copas": 6, "supercopas": 8, "total": 23 },
     "real_madrid": { "ligas": 4, "copas": 2, "supercopas": 3, "total": 9 },
-    "fuente": "AS/Opta R01"
+    "fuente": "AS/Opta"
   },
   "opta_0304_1718": {
     "barcelona": { "pen_favor": 125, "pen_contra": 57, "saldo_pen": 68, "rojas_propias": 61, "rojas_rivales": 104, "saldo_rojas": 43 },
     "real_madrid": { "pen_favor": 126, "pen_contra": 66, "saldo_pen": 60, "rojas_propias": 88, "rojas_rivales": 83, "saldo_rojas": -5 },
-    "fuente": "AS/Opta R01"
+    "fuente": "AS/Opta"
   },
   "marca_0102_1718": {
     "pts_via_penaltis": { "barcelona": 88, "real_madrid": 125 },
     "pts_via_rojas_rivales": { "barcelona": 61, "real_madrid": 36 },
-    "techo_impacto_4_arbitros_pts_totales": 21,
     "techo_impacto_pts_por_temporada": 1.2,
-    "fuente": "Marca Informe Negreira R03"
+    "fuente": "Marca Informe Negreira"
   },
   "prensa_sesgo": {
     "marca_as_foco_madrid_pct": 83.2,
     "md_sport_foco_barca_pct": 94.6,
-    "fuente": "MDPI R19"
+    "fuente": "MDPI 2021"
   },
   "negreira_pagos": {
     "rango_eur_millones": { "min": 7.3, "max": 8.4 },
     "periodo": "2001-2018",
-    "vehiculos": ["DASNIL 95 SL", "NILSAD SCP", "SOCCERCAM SL"],
-    "fuente": "Fiscalía / AEAT R23"
+    "vehiculos": ["DASNIL 95 SL", "NILSAD SCP", "SOCCERCAM SL"]
   },
-  "ffp_auditoria": {
-    "banderas": [
-      {
-        "id": "FFP-R01",
-        "severidad": "ROJA",
-        "club": "FC Barcelona",
-        "afirmacion": "Pagos millonarios a VP del CTA (Negreira) durante 2001-2018 sin prestación documental clara según Fiscalía",
-        "evidencia_publica": "Denuncia Fiscalía; AEAT; club admitió pagos por 'informes'",
-        "como_verificar": "Leer denuncia Fiscalía + declaración Negreira AEAT + facturas citadas en sumario periodístico",
-        "norma_relevante": "Integridad / posible corrupción deportiva; materialidad contable (gasto vs servicio)",
-        "estado": "En instrucción judicial; no sentencia firme de amaño",
-        "fuentes": ["R23", "R21"]
-      },
-      {
-        "id": "FFP-R02",
-        "severidad": "ROJA",
-        "club": "FC Barcelona",
-        "afirmacion": "Clasificación incorrecta de ingresos por venta de derechos futuros (palancas) en reporting UEFA break-even / CLFS",
-        "evidencia_publica": "CFCB/CAS: misclassification ~267 M€; multa/settlement posteriores",
-        "como_verificar": "Leer award CAS público + summary Settlement Agreement UEFA julio 2025",
-        "norma_relevante": "UEFA CL&FFP / CLFS Annex accounting requirements",
-        "estado": "Sancionado / settlement (15 M€ incondicional; hasta 60 M€)",
-        "fuentes": ["R26", "R27"]
-      },
-      {
-        "id": "FFP-R03",
-        "severidad": "ROJA",
-        "club": "FC Barcelona",
-        "afirmacion": "Incumplimiento requisitos de estabilidad CLFS (Arts. 85-92 ed. 2024) reconocido en settlement 2025",
-        "evidencia_publica": "UEFA Settlement Agreement summary PDF oficial",
-        "como_verificar": "Descargar PDF UEFA editorial.uefa.com settlement Barcelona",
-        "norma_relevante": "CLFS 2024 Arts. 85-92",
-        "estado": "Settlement 2 años vigente",
-        "fuentes": ["R26"]
-      },
-      {
-        "id": "FFP-N01",
-        "severidad": "NARANJA",
-        "club": "FC Barcelona",
-        "afirmacion": "Masa salarial elevada vs ingresos (umbral UEFA ~70%); presión de liquidez post-2018",
-        "evidencia_publica": "Cuentas club 17/18: wage bill ~66% ingresos; crisis posterior documentada",
-        "como_verificar": "Cuentas anuales publicadas FC Barcelona 2017/18 PDF",
-        "norma_relevante": "Cost control / solvency CLFS; estatutos art. 67 club",
-        "estado": "Indicador de riesgo, no prueba de fraude por sí solo",
-        "fuentes": ["R28"]
-      },
-      {
-        "id": "FFP-N02",
-        "severidad": "NARANJA",
-        "club": "FC Barcelona",
-        "afirmacion": "Cesión de ingresos futuros (palancas) tratada por UEFA más como deuda/financiación que como Relevant Income",
-        "evidencia_publica": "CFCB rechazó parte como relevant income; reporte prensa basado en UEFA",
-        "como_verificar": "Settlement/CAS + comunicados CFCB",
-        "norma_relevante": "Definición Relevant Income Annex X CL&FFP",
-        "estado": "Riesgo estructural de reporting",
-        "fuentes": ["R27", "R29"]
-      },
-      {
-        "id": "FFP-N03",
-        "severidad": "NARANJA",
-        "club": "Real Madrid",
-        "afirmacion": "Deuda bruta elevada históricamente (~600 M€ en 2013/14) aunque FFP clásico miraba break-even no stock de deuda",
-        "evidencia_publica": "Memoria club citada por AS 2014; UEFA debatía incluir deuda acumulada",
-        "como_verificar": "Memorias anuales Real Madrid + hemeroteca AS",
-        "norma_relevante": "FFP histórico: break-even; deuda no era sanción directa",
-        "estado": "Riesgo de apalancamiento, no sanción FFP automática entonces",
-        "fuentes": ["R30"]
-      },
-      {
-        "id": "FFP-N04",
-        "severidad": "NARANJA",
-        "club": "Real Madrid",
-        "afirmacion": "Venta de flujos futuros Bernabéu (Sixth Street ~360 M€) — UEFA indicó que este tipo de operaciones no cuentan como beneficio FFP legítimo igual que palancas",
-        "evidencia_publica": "Reportes Telegraph/AllFootball citando posición UEFA sobre ambos clubes",
-        "como_verificar": "Contrastar con cuentas RM y comunicados UEFA/CFCB del periodo",
-        "norma_relevante": "Relevant Income vs financing",
-        "estado": "Misma zona gris que Barça en instrumento; diferencial en sanciones publicadas",
-        "fuentes": ["R29"]
-      },
-      {
-        "id": "FFP-N05",
-        "severidad": "NARANJA",
-        "club": "Ambos / sistema",
-        "afirmacion": "Asimetría de transparencia: pagos Negreira fuera del perímetro 'fair play deportivo' pero con impacto reputacional y posible materialidad si no hubo servicio real",
-        "evidencia_publica": "Fiscalía: facturas sin prestación técnica real acreditada en fase inicial",
-        "como_verificar": "Criterio auditor: substance over form — ¿hay entregables? ¿precio de mercado? ¿independencia?",
-        "norma_relevante": "NIC/NIIF substance; integridad UEFA",
-        "estado": "Pregunta de auditoría forense abierta",
-        "fuentes": ["R23"]
-      },
-      {
-        "id": "FFP-V01",
-        "severidad": "VERDE/CHECK",
-        "club": "FC Barcelona (17/18)",
-        "afirmacion": "Club reportó 8 años de auditorías limpias sin salvedades y ratio deuda neta/EBITDA 0,68 < 2 (estatutos)",
-        "evidencia_publica": "Informe económico 2017/18 publicado por el club",
-        "como_verificar": "PDF cuentas 17/18 FC Barcelona",
-        "norma_relevante": "Estatutos art. 67; auditoría externa",
-        "estado": "No contradice banderas posteriores de reporting UEFA",
-        "fuentes": ["R28"]
-      }
+  "uefa_proceso": {
+    "inicio_investigacion": "2023",
+    "admision_provisional_competiciones": "2023-07",
+    "denuncia_real_madrid_docs": "2026-10-01",
+    "posicion_uefa": "Recibe documentación del Madrid; inspectores la incorporan a investigación en curso",
+    "posicion_madrid": "Pide celeridad y medidas disciplinarias; habla de riesgo sistémico de integridad",
+    "posicion_barca": "Expediente no se cerró; no hay expediente nuevo; club ha atendido requerimientos",
+    "fuentes": [
+      "https://www.realmadrid.com/es-ES/noticias/club/comunicados/comunicado-oficial-01-10-2026",
+      "https://as.com/futbol/primera/el-real-madrid-solicita-a-uefa-medidas-disciplinarias-contra-el-barcelona-f202606-n/"
     ]
   },
-  "hipotesis_scores": {
-    "H1_compra_dura": 2,
-    "H2_seguro_info": 8,
-    "H3_dominio_deportivo": 6,
-    "H4_sesgo_prensa": 7,
-    "H5_estilo_juego": 5,
-    "H6_combinada": 9
-  }
+  "laliga_temporada": [
+    {"temp":"04/05","comp":"LaLiga","bcn_pen_f":10,"bcn_pen_c":3,"bcn_roj":3,"bcn_roj_riv":7,"mad_pen_f":5,"mad_pen_c":4,"mad_roj":5,"mad_roj_riv":3,"bcn_goles":null,"mad_goles":null,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate"},
+    {"temp":"05/06","comp":"LaLiga","bcn_pen_f":12,"bcn_pen_c":4,"bcn_roj":6,"bcn_roj_riv":10,"mad_pen_f":10,"mad_pen_c":7,"mad_roj":11,"mad_roj_riv":4,"bcn_goles":null,"mad_goles":null,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate"},
+    {"temp":"06/07","comp":"LaLiga","bcn_pen_f":8,"bcn_pen_c":5,"bcn_roj":7,"bcn_roj_riv":10,"mad_pen_f":5,"mad_pen_c":6,"mad_roj":9,"mad_roj_riv":8,"bcn_goles":null,"mad_goles":null,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate"},
+    {"temp":"07/08","comp":"LaLiga","bcn_pen_f":7,"bcn_pen_c":11,"bcn_roj":5,"bcn_roj_riv":3,"mad_pen_f":6,"mad_pen_c":4,"mad_roj":6,"mad_roj_riv":5,"bcn_goles":null,"mad_goles":null,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate"},
+    {"temp":"08/09","comp":"LaLiga","bcn_pen_f":9,"bcn_pen_c":3,"bcn_roj":6,"bcn_roj_riv":7,"mad_pen_f":4,"mad_pen_c":6,"mad_roj":9,"mad_roj_riv":3,"bcn_goles":105,"mad_goles":83,"bcn_poss":null,"mad_poss":null,"bcn_sot":102,"mad_sot":82,"bcn_shots":418,"mad_shots":417,"fuente":"Futbolgate+FBref"},
+    {"temp":"09/10","comp":"LaLiga","bcn_pen_f":3,"bcn_pen_c":1,"bcn_roj":5,"bcn_roj_riv":6,"mad_pen_f":8,"mad_pen_c":2,"mad_roj":5,"mad_roj_riv":6,"bcn_goles":98,"mad_goles":102,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+tabla Liga"},
+    {"temp":"10/11","comp":"LaLiga","bcn_pen_f":5,"bcn_pen_c":5,"bcn_roj":2,"bcn_roj_riv":8,"mad_pen_f":12,"mad_pen_c":4,"mad_roj":7,"mad_roj_riv":6,"bcn_goles":95,"mad_goles":102,"bcn_poss":72.0,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+El Confidencial (posesión Guardiola ~73%)"},
+    {"temp":"11/12","comp":"LaLiga","bcn_pen_f":11,"bcn_pen_c":4,"bcn_roj":4,"bcn_roj_riv":8,"mad_pen_f":13,"mad_pen_c":1,"mad_roj":5,"mad_roj_riv":12,"bcn_goles":114,"mad_goles":121,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+tabla Liga"},
+    {"temp":"12/13","comp":"LaLiga","bcn_pen_f":5,"bcn_pen_c":4,"bcn_roj":3,"bcn_roj_riv":4,"mad_pen_f":9,"mad_pen_c":3,"mad_roj":6,"mad_roj_riv":8,"bcn_goles":115,"mad_goles":103,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+tabla Liga"},
+    {"temp":"13/14","comp":"LaLiga","bcn_pen_f":12,"bcn_pen_c":3,"bcn_roj":1,"bcn_roj_riv":3,"mad_pen_f":6,"mad_pen_c":6,"mad_roj":3,"mad_roj_riv":5,"bcn_goles":100,"mad_goles":104,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+tabla Liga"},
+    {"temp":"14/15","comp":"LaLiga","bcn_pen_f":7,"bcn_pen_c":5,"bcn_roj":3,"bcn_roj_riv":8,"mad_pen_f":13,"mad_pen_c":5,"mad_roj":3,"mad_roj_riv":1,"bcn_goles":110,"mad_goles":118,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+tabla Liga"},
+    {"temp":"15/16","comp":"LaLiga","bcn_pen_f":19,"bcn_pen_c":1,"bcn_roj":1,"bcn_roj_riv":9,"mad_pen_f":9,"mad_pen_c":4,"mad_roj":5,"mad_roj_riv":5,"bcn_goles":112,"mad_goles":110,"bcn_poss":64.5,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+El Confidencial (posesión Lucho)"},
+    {"temp":"16/17","comp":"LaLiga","bcn_pen_f":9,"bcn_pen_c":0,"bcn_roj":1,"bcn_roj_riv":10,"mad_pen_f":8,"mad_pen_c":4,"mad_roj":2,"mad_roj_riv":4,"bcn_goles":116,"mad_goles":106,"bcn_poss":null,"mad_poss":null,"bcn_sot":null,"mad_sot":null,"bcn_shots":null,"mad_shots":null,"fuente":"Futbolgate+tabla Liga"},
+    {"temp":"17/18","comp":"LaLiga","bcn_pen_f":5,"bcn_pen_c":2,"bcn_roj":2,"bcn_roj_riv":4,"mad_pen_f":10,"mad_pen_c":4,"mad_roj":4,"mad_roj_riv":3,"bcn_goles":99,"mad_goles":94,"bcn_poss":62.8,"mad_poss":60.2,"bcn_sot":96,"mad_sot":91,"bcn_shots":418,"mad_shots":418,"fuente":"Futbolgate+FBref/AS Opta"}
+  ],
+  "clasico_muestra_rojas": {
+    "periodo_aprox": "~35 enfrentamientos hasta may-2018",
+    "rojas_madrid": 13,
+    "rojas_barca": 6,
+    "fuente": "El Español / El Bernabéu"
+  },
+  "polemicas": [
+    {"fecha":"2004-11","titulo":"Elecciones RFEF / apoyo Laporta a Villar","clubes":"Sistema","severidad":"naranja","resumen":"Origen mediático del relato 'Villarato'.","fuente":"Wikipedia Villarato / hemeroteca"},
+    {"fecha":"2009-2011","titulo":"Clásicos Guardiola–Mourinho","clubes":"Ambos","severidad":"naranja","resumen":"Alta tensión arbitral; expulsiones asimétricas en Clásicos.","fuente":"El Español 2018"},
+    {"fecha":"2011-12","titulo":"Mejor saldo arbitral Madrid (tramo Mourinho)","clubes":"Madrid","severidad":"info","resumen":"Futbolgate: temporada con saldo más favorable blanco del periodo.","fuente":"Futbolgate"},
+    {"fecha":"2013-14","titulo":"Mateu / gol Messi vs Atlético (Liga)","clubes":"Barça","severidad":"naranja","resumen":"Error citado por Marca que perjudicó al Barça; Atlético campeón.","fuente":"Marca Informe"},
+    {"fecha":"2015-16","titulo":"19 penaltis a favor Barça / 1 en contra","clubes":"Barça","severidad":"roja","resumen":"Pico histórico; Liga por 1 punto.","fuente":"AS/Opta / Futbolgate"},
+    {"fecha":"2016-03→2018-03","titulo":"78 partidos sin penalti en contra Barça","clubes":"Barça","severidad":"roja","resumen":"Racha rota por Mateu (Las Palmas).","fuente":"ABC / Marca"},
+    {"fecha":"2017","titulo":"Filtración Clos Gómez final Copa (meses antes)","clubes":"Barça","severidad":"roja","resumen":"Entorno Negreira avisó designación con antelación.","fuente":"El Confidencial / El Español"},
+    {"fecha":"2018","titulo":"Fin pagos Negreira / llegada Rubiales–Velasco","clubes":"Sistema","severidad":"info","resumen":"Coincide con cese de pagos según Fiscalía.","fuente":"Fiscalía"},
+    {"fecha":"2023-02","titulo":"Estalla caso Negreira (pagos públicos)","clubes":"Barça","severidad":"roja","resumen":"AEAT/SER; club admite pagos por informes.","fuente":"SER / Fiscalía"},
+    {"fecha":"2023-07","titulo":"UEFA admite provisionalmente al Barça en competiciones","clubes":"Barça","severidad":"naranja","resumen":"Expediente disciplinario en suspenso con reserva de reanudación.","fuente":"UEFA / 20minutos"},
+    {"fecha":"2025-07","titulo":"Settlement FFP UEFA Barça (15–60 M€)","clubes":"Barça","severidad":"roja","resumen":"Incumplimiento estabilidad CLFS / reporting.","fuente":"UEFA PDF"},
+    {"fecha":"2026-06","titulo":"Madrid pide a UEFA reactivar expediente Negreira","clubes":"Madrid→UEFA","severidad":"roja","resumen":"Riesgo sistémico de integridad según el club.","fuente":"AS"},
+    {"fecha":"2026-10-01","titulo":"UEFA confirma recepción dossier Madrid (~500 págs.)","clubes":"Ambos/UEFA","severidad":"roja","resumen":"Inspectores incorporan docs a investigación en curso. Barça: no es expediente nuevo.","fuente":"Comunicados UEFA/RM/Barça"}
+  ]
 }
